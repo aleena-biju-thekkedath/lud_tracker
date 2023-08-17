@@ -1,2 +1,10 @@
 db.sqlite3
 venv
+
+lead/__pycache__/
+lead/migrations/__pycache__/
+lud_tracker/__pycache__/
+manager/__pycache__/
+manager/migrations/__pycache__/
+member/__pycache__/
+member/migrations/__pycache__/
