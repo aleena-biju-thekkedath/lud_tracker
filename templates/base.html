@@ -10,8 +10,16 @@
     crossorigin="anonymous">
     {% block extrahead %}{% endblock extrahead %}
   </head>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid rounded" style="min-height: 65px; width:97%; ">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand mb-0 mb-md-1" href="#">Navbar</a>
+      </div>
+    </div>
+  </nav>
+  
   <body>
-    
     {% block content %}
     {% endblock content %}
 
@@ -20,3 +28,20 @@
     crossorigin="anonymous"></script>
   </body>
 </html>
+
+<style>
+
+  .navbar {
+  min-height: 110px;
+  background:linear-gradient(90deg, #9cdf94 0%, #7bc96f 43%, #69c75f 100%) ;
+  }
+
+    .container-fluid {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+      }
+
+
+
+
+</style>
+
