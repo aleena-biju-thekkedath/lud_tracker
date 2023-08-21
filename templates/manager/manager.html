@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title%}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+<div class =" container">
+
+    <!-- Heading Content Here -->
+    <h1> Welcome, Project Manager <br> {Name of Manager}</h1>
+    <button type="button" class="btn btn-success">Assign New Team </button>
+</div>
+
+<div class="container text-center">
+    <div class="row align-items-start">
+
+      <!-- All Content of Column 1 here ! -->
+      
+        <div class="col g-3 colbor_pad">  
+          
+          <h3> Current Projects </h3>      
+          <div class = "display-7"> Progress of Project 1 {} </div>
+          <div class = "display-7"> Progress of Project 2 {} </div>
+        </div>
+      
+    <!-- All Content of Column 1 here ! -->
+      <div class="col g-3 mx-3 order-2 colbor_pad">
+         <div class ="display-3"> Calendar </div>
+      </div>
+    </div>
+  </div>
+    
+
+{% endblock content %}
