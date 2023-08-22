@@ -9,41 +9,65 @@
 
 {% block content %}
 
-
-
 <div class =" container">
 
     <!-- Heading Content Here -->
     <h1 style= "text-align: center;"> Create New Team </h1>
     <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
-</div>
 
-<div class="container">
-    <div class="mb-3 text-center">
-        <input type="number" style="background-color: rgb(56, 163, 165);" class= "form-control custom-input form-control-color" id="no_of_members_input1" placeholder="No. of Members (only numbers)">
-    </div>
 
-</div>
-
-<div class="container text-center">
-    <div class="row align-items-start">
-
-      <!-- All Content of Column 1 here ! -->
-      
-        <div class="col g-3 text-start colbor_pad">  
-          
-          <h3> Current Projects </h3>      
-          <div class = "display-6"> Progress of Project 1 {} </div>
-          <div class = "display-6"> Progress of Project 2 {} </div>
-        </div>
-      
-    <!-- All Content of Column 1 here ! -->
-      <div class="col g-3 mx-3 order-2 colbor_pad">
-         <div class ="display-3"> Calendar </div>
-      </div>
-    </div>
+<!-- Contents for the Dropdown Box for number of Members -->
+  <div class="input-group mb-3">
+    <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Members</label>
+    <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+      <option selected>None</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
   </div>
+
+ <div class="row row-cols-lg-auto g-3 align-items-center" >
+    <!-- Column - 1 -->
+    <form class = "form-inline">
+      <div class="col-12">
+        <div class="input-group mb-3">
+          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+            <option selected>Select a Person</option>
+          </select>
+        </div>
+
+        <!-- Column - 2 -->
+        <div class="col-12">
+          <div class="input-group mb-3">
+            <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+            <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+              <option selected>Select a Person</option>
+            </select>
+          </div>
+        </div>
+
+            <div class="col-12">
+              <div class="input-group mb-3">
+                <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+                <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+                  <option selected>Select a Person</option>
+                </select>
+              </div>  
+            </div>
+    </form>
     
+  </div>
+</div>
+
+      
+
+      
+
+
+      
 
 
 {% endblock content %}
