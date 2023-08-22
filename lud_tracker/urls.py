@@ -22,4 +22,6 @@ urlpatterns = [
     path("",include('member.urls')),
     path("manager/",include('manager.urls')),
     path("leads/",include('lead.urls')),
+
+
 ]
