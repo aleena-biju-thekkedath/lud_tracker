@@ -8,11 +8,21 @@
 {% endblock extrahead %}
 
 {% block content %}
+
+
+
 <div class =" container">
 
     <!-- Heading Content Here -->
-    <h1> Welcome, Project Manager <br> {Name of Manager}</h1>
-    <button type="button" class="btn btn-success">Assign New Team </button>
+    <h1 style= "text-align: center;"> Create New Team </h1>
+    <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
+</div>
+
+<div class="container">
+    <div class="mb-3 text-center">
+        <input type="number" style="background-color: rgb(56, 163, 165);" class= "form-control custom-input form-control-color" id="no_of_members_input1" placeholder="No. of Members (only numbers)">
+    </div>
+
 </div>
 
 <div class="container text-center">
@@ -34,5 +44,6 @@
     </div>
   </div>
     
+
 
 {% endblock content %}
