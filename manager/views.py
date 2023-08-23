@@ -7,4 +7,7 @@ def home_manager(request):
 def create_team(request):
     return render(request,'manager/create_team.html')
 
+def calendar(request):
+    return render(request,'manager/calendar.html')
+
 

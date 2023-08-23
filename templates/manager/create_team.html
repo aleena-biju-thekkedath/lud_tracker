@@ -12,7 +12,7 @@
 <div class =" container">
 
     <!-- Heading Content Here -->
-    <h1 style= "text-align: center;"> Create New Team </h1>
+    <h3 style= "text-align: center;"> Create New Team </h3>
     <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
 
 
@@ -60,19 +60,21 @@
     </form>
 
 
-  <form class="row row-cols-lg-auto g-3 align-items-center">
-    <div class = "col-auto"> 
-      <h5> Assign Team Lead </h5>
-    </div>
-      <div class="col-auto">
-        <div class="input-group mb-3">
-          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-            <option selected>Select a Person</option>
-          </select>
+  <form class="row row-cols-lg-auto g-3 align-items-start">
+        <div class = "col-auto"> 
+          <h5> Assign Team Lead </h5>
         </div>
 
-    </div>
+        <!-- Box to fill the Team Lead Name  -->
+        <div class="col-auto">
+            <div class="input-group mb-3">
+              <label class="input-group-text inputbar" style="color: white;">Name</label>
+              <select class="form-select inputbar" style=" color: white;">
+                <option selected>Select a Person</option>
+              </select>
+            </div>
+          </div>
+        </div>
   </form>
 
   <div class = "container">
@@ -81,30 +83,36 @@
         <h5> Assign Project </h5>
       </div>
 
-      <div class = "col-auto">
+      <div class = "col-auto align-items-center">
         <input type="text" class="form-control" id="autoSizingInput" placeholder="Project Title">
       </div>
-
-      <div class = "col-auto">
-        <div class="input-group">
-          <span class="input-group-text">Project Desc</span>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
-        </div>
-      </div>
     </form>
   </div>
 
-  <div class = "container">
+  <div class = "col-auto">
+    <div class="input-group">
+      <span class="input-group-text">Project Desc</span>
+      <input type="text" class="form-control" id="autoSizingInput" placeholder="Project Description">
+      
+    </div>
+  </div>
+
+  
+  
+  <div class = "container" style="padding-top: 15px;">
     <form class="row row-cols-lg-auto g-3 align-items-center"></form>
-      <div class = "col-auto">
-        <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="Start Date">
+      <div class = "col-12">
+          <p> <strong>Start Date</strong></p>
+          <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="Start Date">
       </div>
 
-      <div class = "col-auto">
-        <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="End Date">
+      <div class = "col-12">
+            <p> <strong>End Date</strong></p>
+            <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="End Date">
       </div>
     </form>
   </div>
+  
   
 
 
