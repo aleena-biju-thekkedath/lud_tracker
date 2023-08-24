@@ -8,38 +8,130 @@
 {% endblock extrahead %}
 
 {% block content %}
-<div class="container text-center">
-    <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
-      <div class="col">
-        <div class="p-3">Row column</div>
-      </div>
+
+<style>
+    .card {
+        border: 40px;
+        border-radius: 12px;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        
+    }
+
+
+</style>
+
+
+
+
+
+<div class="container-fluid pt-5">
+    <div class="row mt-5">
+        <div class="col-md-8" style="border-right: 1px solid rgb(214, 214, 214);">
+            <div class="container">
+                <div class="row gx-3">
+                    <!-- Task Ready -->
+                    <div class="col-3">
+                        <div class="p-3">
+                            <h3>Task Ready</h3>
+                        </div>
+                        <div class="card mt-3" >
+                            <!-- Card content for Task Ready -->
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                    </div>
+                    <!-- In Progress -->
+                    <div class="col-3">
+                        <div class="p-3">
+                            <h3>In progress</h3>
+                        </div>
+                        <div class="card mt-3" >
+                            <!-- Card content for In Progress -->
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                        <div class="card mt-3" >
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                    </div>
+                    <!-- In Review -->
+                    <div class="col-3">
+                        <div class="p-3">
+                            <h3>In review</h3>
+                        </div>
+                        <div class="card mt-3" >
+                            <!-- Card content for In Review -->
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                        <div class="card mt-3" >
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                        <div class="card mt-3" >
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Done -->
+                    <div class="col-3">
+                        <div class="p-3">
+                            <h3>Done</h3>
+                        </div>
+                        <div class="card mt-3" >
+                            <!-- Card content for Done -->
+                            <div class="card-body">
+                                <h5 class="card-title">task 1</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
+                                <p class="card-text">nvgjdfsikjgh dkjgnhdfgkjnfkjxgfzxlkgdsxlkjgdfglknjdslk</p>
+                                <i class="fas fa-flag"></i> 22 Aug
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Line and 'text' -->
+  
+        <div class="col-md-4" >
+            <div class="container">
+                <div class="row align-items-center"> 
+                        <div class="col" >
+                            <h1>text</h1>
+                  
+                            <!-- Other content can be added here -->
+                        </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+
+
 {% endblock content %}
