@@ -9,61 +9,50 @@
 
 {% block content %}
 
-<div class =" container">
+<style>
+  .container-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
 
-    <!-- Heading Content Here -->
-    <h1 style= "text-align: center;"> Create New Team </h1>
-    <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
+<div class="container mt-5">
+
+  <!-- Heading Content Here -->
+  <h1 class="mb-4 text-center">Create New Team</h1>
+  <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
 
 
-<!-- Contents for the Dropdown Box for number of Members -->
-  <div class="input-group mb-3">
-    <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Members</label>
-    <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-      <option selected>None</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
+  <!-- Contents for the Dropdown Box for number of Members -->
+  <div class="container-dropdown mb-3">
+    <span class="select-wrapper">
+      <label for=""></label>
+      <select>
+        <option value="*" disabled selected>Please select...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+ 
+      </select>
+    </span>
   </div>
 
 
   <form class="row row-cols-lg-auto g-3 align-items-center">
-      <!-- Column - 1 -->
-        <div class="col-auto">
-          <div class="input-group mb-3">
-            <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-            <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-              <option selected>Select a Person</option>
-            </select>
-          </div>
+    <!-- Column - 1 -->
+    <div class="col-auto">
+      <div class="input-group mb-3">
+        <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+        <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+          <option selected>Select a Person</option>
+        </select>
+      </div>
 
-          <!-- Column - 2 -->
-          <div class="col-auto">
-            <div class="input-group mb-3">
-              <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-              <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-                <option selected>Select a Person</option>
-              </select>
-            </div>
-          </div>
-
-              <div class="col-auto">
-                <div class="input-group mb-3">
-                  <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-                  <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-                    <option selected>Select a Person</option>
-                  </select>
-                </div>  
-              </div>
-    </form>
-
-
-  <form class="row row-cols-lg-auto g-3 align-items-center">
-    <div class = "col-auto"> 
-      <h5> Assign Team Lead </h5>
-    </div>
+      <!-- Column - 2 -->
       <div class="col-auto">
         <div class="input-group mb-3">
           <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
@@ -71,21 +60,45 @@
             <option selected>Select a Person</option>
           </select>
         </div>
+      </div>
+
+      <div class="col-auto">
+        <div class="input-group mb-3">
+          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+            <option selected>Select a Person</option>
+          </select>
+        </div>
+      </div>
+  </form>
+
+
+  <form class="row row-cols-lg-auto g-3 align-items-center">
+    <div class="col-auto">
+      <h5> Assign Team Lead </h5>
+    </div>
+    <div class="col-auto">
+      <div class="input-group mb-3">
+        <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
+        <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
+          <option selected>Select a Person</option>
+        </select>
+      </div>
 
     </div>
   </form>
 
-  <div class = "container">
+  <div class="container">
     <form class="row row-cols-lg-auto g-3 align-items-center">
-      <div class = "col-auto">
+      <div class="col-auto">
         <h5> Assign Project </h5>
       </div>
 
-      <div class = "col-auto">
+      <div class="col-auto">
         <input type="text" class="form-control" id="autoSizingInput" placeholder="Project Title">
       </div>
 
-      <div class = "col-auto">
+      <div class="col-auto">
         <div class="input-group">
           <span class="input-group-text">Project Desc</span>
           <textarea class="form-control" aria-label="With textarea"></textarea>
@@ -94,26 +107,26 @@
     </form>
   </div>
 
-  <div class = "container">
+  <div class="container">
     <form class="row row-cols-lg-auto g-3 align-items-center"></form>
-      <div class = "col-auto">
-        <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="Start Date">
-      </div>
+    <div class="col-auto">
+      <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="Start Date">
+    </div>
 
-      <div class = "col-auto">
-        <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="End Date">
-      </div>
+    <div class="col-auto">
+      <input type="datetime-local" class="form-control" id="autoSizingInput" placeholder="End Date">
+    </div>
     </form>
   </div>
-  
+
 
 
 
 </div>
-      
 
 
-      
+
+
 
 
 {% endblock content %}
