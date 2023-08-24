@@ -16,6 +16,10 @@
     align-items: center;
     justify-content: center;
   }
+
+  select{
+    height: 40px;
+  }
 </style>
 
 <div class="container mt-5">
@@ -27,8 +31,8 @@
 
   <!-- Contents for the Dropdown Box for number of Members -->
   <div class="container-dropdown mb-3">
-    <span class="select-wrapper">
-      <label for=""></label>
+    <div class="select-wrapper">
+      <label >Number of members required <label>
       <select>
         <option value="*" disabled selected>Please select...</option>
         <option value="1">1</option>
@@ -38,39 +42,31 @@
         <option value="5">5</option>
  
       </select>
-    </span>
+    </div>
   </div>
 
+  <div class="col-md-12">
+    <table id="myTable" class="display">
+      <thead>
+          <tr>
+              <th>Column 1</th>
+              <th>Column 2</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Row 1 Data 1</td>
+              <td>Row 1 Data 2</td>
+          </tr>
+          <tr>
+              <td>Row 2 Data 1</td>
+              <td>Row 2 Data 2</td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
 
-  <form class="row row-cols-lg-auto g-3 align-items-center">
-    <!-- Column - 1 -->
-    <div class="col-auto">
-      <div class="input-group mb-3">
-        <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-        <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-          <option selected>Select a Person</option>
-        </select>
-      </div>
-
-      <!-- Column - 2 -->
-      <div class="col-auto">
-        <div class="input-group mb-3">
-          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-            <option selected>Select a Person</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col-auto">
-        <div class="input-group mb-3">
-          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-            <option selected>Select a Person</option>
-          </select>
-        </div>
-      </div>
-  </form>
+  
 
 
   <form class="row row-cols-lg-auto g-3 align-items-center">
