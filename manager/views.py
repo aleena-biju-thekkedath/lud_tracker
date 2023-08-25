@@ -10,4 +10,7 @@ def create_team(request):
 def calendar(request):
     return render(request,'manager/calendar.html')
 
+def project_modal(request):
+    return render(request,'manager/project_modal.html')
+
 

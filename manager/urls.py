@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path("",views.home_manager,name='manager-home'),
     path("team/",views.create_team, name = 'manager-create'),
-    path("calendar/",views.calendar, name = "manager-calendar")
+    path("calendar/",views.calendar, name = "manager-calendar"),
+    path("modal/",views.project_modal, name = "manager-modal")
 ]
