@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Forms Page </title>
+    <title>Register User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   </head>
-  <body style="background-color:rgb(194, 209, 39);">
+  <body style="background-color:#38A3A7;">
     <div class="text-bg-dark p-3">
       <h1 style="text-align: center;">Fill in the Below Details</h1> <br>
     </div>
@@ -16,13 +16,19 @@
     <div class = "container">
       <div class = "form-group">
         <form method = "POST",
-          action = """
-          enctype="multipart/form-data" >
-          {% csrf_token %}  
-          {{form.as_p}}
-          <button style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"> Submit Details </button>
+          action = ""
+          enctype="multipart/form-data">
+          {% csrf_token %} 
+        <div class = "container" style =""> 
+           {{form}}
+          <button style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+             Submit Details 
+            </button>
+        </div>
+          
           
       </div> 
     </div>  
   </body>  
+
     
