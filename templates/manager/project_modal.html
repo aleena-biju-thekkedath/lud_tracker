@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title%}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
+
+<style>
+    .cont-modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn {
+        width: max-content;
+    }
+</style>
+
+<!-- Button trigger modal -->
+<div class="cont-modal pt-4 bg-transparent">
+
+    <div class="row">
+        <div class="col-md-5">
+
+            <button type="button" class="btn btn-dark btn btn-outline-info btn btn-primary btn-lg "
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Project Details
+            </button>
+
+            <!-- Modal -->
+            <div class="modal-dialog modal-dialog-centered"></div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5 " id="exampleModalLabel">Project Details</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                readonly></button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="col-sm-12">
+                                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                                    <h6 class="text-primary-emphasis fw-bold">Project Name <i
+                                            class="fa-solid fa-bookmark"></i></i></h6>
+                                    <input type="text" class="form-control" placeholder="Title of the task"
+                                        aria-label="title" readonly>
+                                </div>
+                                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                                    <h6 class="text-primary-emphasis fw-bold">Members working on the project <i
+                                            class="fa-solid fa-people-group"></i></i></i></h6>
+                                    <input type="text" class="form-control" placeholder="Members" aria-label="title"
+                                        readonly>
+                                </div>
+                                <div class="row">
+                                    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+
+                                        <h6 for="exampleFormControlDate1" class="text-primary-emphasis fw-bold">
+                                            Project Start Date <i class="fa-regular fa-calendar-days"></i></h6>
+                                        <input type="date" class="form-control" placeholder="Start date"
+                                            id="exampleFormControlDate1">
+                                    </div>
+                                </div>
+                                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+
+                                    <h6 for="exampleFormControlDate2" class="text-primary-emphasis fw-bold">Project
+                                        End Date <i class="fa-regular fa-calendar-days" style="color: #131416;"></i>
+                                    </h6>
+                                    <input type="date" class="form-control" placeholder="Start date"
+                                        id="exampleFormControlDate2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark btn btn-outline-info btn" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Add members</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock content %}

@@ -219,23 +219,29 @@
 </script>
 <div class="login-box">
   <h2>Login</h2>
-  <form>
+  <form method="post">
+    {% csrf_token %}
     <div class="user-box">
-      <input type="text" name="" required="" />
+      <input type="text" name="Username" required="" />
       <label>Username</label>
     </div>
     <div class="user-box">
-      <input type="password" name="" required="" />
+      <input type="password" name="password" required="" />
       <label>Password</label>
     </div>
-    <a href="#" style="font-weight: 600;">
+    <button style="font-weight: 600;" type="submit">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
       Submit
-    </a>
+    </button>
+    <!-- <a href="#" style="font-weight: 600;">
+      
+      
+    </a> -->
   </form>
+
   <style>
     html {
       height: 100%;
