@@ -1,63 +1,97 @@
-  <!doctype html>
+<!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LUD Tracker | {% block title %}{% endblock title %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
-    crossorigin="anonymous">
-    <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
-    <script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
-    {% block extrahead %}{% endblock extrahead %}
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LUD Tracker | {% block title %}{% endblock title %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+  <script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
+  <link
+    href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.css"
+    rel="stylesheet" />
+  {% block extrahead %}{% endblock extrahead %}
+</head>
 
 
 
-  <body style="background-color: #c7f9cc;">
+<body style="background-color: #edfaef;">
 
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid" style="min-height: 65px; width:97%; ">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <a class="navbar-brand mb-0 mb-md-1" style="color: white;" href="#">ALJONI</a>
-        </div>
-     </div>  
-    </nav>
-    {% block content %}
-    {% endblock content %}
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid" style="min-height: 65px; width:97%; ">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand mb-0 mb-md-1" style="color: white;" href="#">ALJONI</a>
+      </div>
+    </div>
+  </nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb float-end p-3">
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+  </nav>
+  {% block content %}
+  {% endblock content %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous"></script>
+  <script
+    src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Initialize datatable with search functionality, pagination, and icons
+      $('#myTable').DataTable({
+        searching: true,
+        ordering: true,
+        paging: true,
+        pageLength: 10,
+        dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+          '<"row"<"col-sm-12"tr>>' +
+          '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+        language: {
+          paginate: {
+            previous: '<i class="fas fa-chevron-left"></i>',
+            next: '<i class="fas fa-chevron-right"></i>'
+          }
+        }
+      })
+    });
 
-  </body>
+  </script>
+</body>
 
-  
-  <style>
-  
-    .navbar {
+
+<style>
+  .navbar {
     min-height: 110px;
-    background-color : #22577a;
-  
-    }
-  
-    .colbor_pad {
-      border: 2px solid black; /* Add desired border properties */
-      padding: 10px; /* Add padding for better appearance */
-    }
-   
-    .custom-input::placeholder {
-    color: white; /* Use your desired color code */
-  }
-  
-  .inputbar {
-    background-color : #22577a
-    }
-  
+    background-color: #22577a;
 
-  </style>
- 
+  }
+
+  .colbor_pad {
+    border: 2px solid black;
+    /* Add desired border properties */
+    padding: 10px;
+    /* Add padding for better appearance */
+  }
+
+  .custom-input::placeholder {
+    color: white;
+    /* Use your desired color code */
+  }
+
+  .inputbar {
+    background-color: #22577a
+  }
+</style>
+
 </html>
- 

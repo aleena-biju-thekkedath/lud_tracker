@@ -9,65 +9,158 @@
 
 {% block content %}
 
-<div class =" container">
+<style>
+  .container-project {
+    background: none;
 
-    <!-- Heading Content Here -->
-    <h1 style= "text-align: center;"> Create New Team </h1>
-    <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
+  }
+
+  .select {
+    display: flex;
+  }
 
 
-<!-- Contents for the Dropdown Box for number of Members -->
-  <div class="input-group mb-3">
-    <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Members</label>
-    <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-      <option selected>None</option>
+
+  .select-items {
+    background-color: #22577a;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .blur-rule {
+    height: 1px;
+    width: 100%;
+    background-color: #dedede;
+    margin: 20px 0;
+    display: flex;
+
+    -webkit-box-shadow: 0 0 1px 0 #666;
+    -moz-box-shadow: 0 0 1px 0 #666;
+    box-shadow: 0 0 1px 0 #666;
+
+  }
+  
+</style>
+
+<div class="container mt-5" style="width: 1500px;">
+
+  <!-- Heading Content Here -->
+  <h1 class="mb-2 text-center">Team Creation</h1>
+  <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
+  <div class="blur-rule"></div>
+
+  <!-- Contents for the Dropdown Box for number of Members -->
+
+  <div class="select mt-5 mb-5">
+    <h5 class="mt-1 mx-2">Number of members <i class="fa-solid fa-caret-right pt-1"></i></h5>
+    <select class="select-items">
+      <option value="*" disabled selected>Please select...</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
-      <option value="6">6</option>
+
     </select>
   </div>
 
- <div class="row row-cols-lg-auto g-3 align-items-center" >
-    <!-- Column - 1 -->
-    <form class = "form-inline">
-      <div class="col-12">
-        <div class="input-group mb-3">
-          <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-          <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-            <option selected>Select a Person</option>
-          </select>
-        </div>
 
-        <!-- Column - 2 -->
-        <div class="col-12">
-          <div class="input-group mb-3">
-            <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-            <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-              <option selected>Select a Person</option>
-            </select>
-          </div>
-        </div>
 
-            <div class="col-12">
-              <div class="input-group mb-3">
-                <label class="input-group-text inputbar" style="color: white;" for="inputGroupSelect01">Name</label>
-                <select class="form-select inputbar" style=" color: white;" id="inputGroupSelect01">
-                  <option selected>Select a Person</option>
-                </select>
-              </div>  
-            </div>
-    </form>
-    
+  <div class="container-table p-3 rounded mt-3 mb-4 border border-black">
+    <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
+
+
+    <table id="myTable" class="display p-1 rounded border">
+      <thead>
+        <tr>
+          <th>Member Name</th>
+          <th>Add to Team</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>M1</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>M2</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>M3</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>M4</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>M5</td>
+          <td><input type="checkbox"></td>
+        </tr>
+        <tr>
+          <td>M6</td>
+          <td><input type="checkbox"></td>
+        </tr>
+
+      </tbody>
+    </table>
   </div>
+
+
+  <div class="select mt-5 mb-5">
+    <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+    <select class="select-items">
+      <option value="*" disabled selected>Please select...</option>
+      <option value="1">M1</option>
+      <option value="2">M2</option>
+      <option value="3">M3</option>
+      <option value="4">M4</option>
+      <option value="5">M5</option>
+
+    </select>
+  </div>
+
+
+
+  <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
+    <form>
+      <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
+      <div class="form-group  mt-3">
+        <label for="exampleFormControlInput2" class="mb-1">Project Title</label>
+        <input type="text" class="form-control border  border-black" id="exampleFormControlInput2" placeholder="Title">
+
+      </div>
+      <div class="form-group mt-2">
+        <label for="exampleFormControlTextarea1" class="mb-1">Project Description</label>
+        <textarea class="form-control mb-1 border border-black" id="exampleFormControlTextarea1" rows="5"
+          placeholder="Description"></textarea>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6 form-group mt-2">
+          <label for="exampleFormControlDate1" class="mb-1">Start Date</label>
+          <input type="date" class="form-control border border-black" placeholder="Start date" id="exampleFormControlDate1">
+        </div>
+        <div class="col-md-6 form-group mt-2">
+          <label for="exampleFormControlDate2" class="mb-1">End Date</label>
+          <input type="date" class="form-control border border-black" placeholder="Start date" id="exampleFormControlDate2">
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <button class="btn btn-lg float-end mb-4" style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
+
 </div>
 
-      
-
-      
 
 
-      
+
 
 
 {% endblock content %}
