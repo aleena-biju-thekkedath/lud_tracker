@@ -1,5 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title%}
+
+{% block extrahead %}
+{% endblock extrahead %}
+
+{% block content %}
 <head>
     <title>File Upload Example</title>
 </head>
@@ -12,4 +20,5 @@
         <button type="submit">Upload</button>
     </form>
 </body>
-</html>
+
+{% endblock content %}
