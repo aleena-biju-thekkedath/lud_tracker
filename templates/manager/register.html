@@ -10,14 +10,20 @@
 {% block content %}
 
 <body>
+  <div class="container-fluid pt-5 bg-transparent">
+    <div class="row">
+        <div class="col-md-5">
   <h1>File Upload</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    <br>
     <label for="file">Choose a file:</label>
     <input type="file" name="file" id="file">
+    <br>
     <button type="submit">Upload</button>
   </form>
-</body>
+  </div>
+</div></body>
 
 
 
