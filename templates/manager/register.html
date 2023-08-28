@@ -26,18 +26,30 @@
     <form method="POST" , action="" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="container">
-        {{form}}
+        <label></label>
+        <label>{{form.username.label}}</label>
+        {{form.username}}
 
-        <button
-          style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-          Submit Details
-        </button>
+        <label>{{form.email.label}}</label>
+        {{form.email}}
+
+        <label>{{form.password.label}}</label>
+        {{form.password}}
+
+        <label>{{form.password2.label}}</label>
+        {{form.password2}}
+
+
+
       </div>
+      <button>
+        Submit Details
+      </button>
     </form>
 
   </div>
 </div>
 </body>
-<h3> The Records are Up To Date <h3>
+
 
     {% endblock content %}
