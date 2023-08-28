@@ -49,6 +49,10 @@ def process_uploaded_csv(request):
    
    else: 
        return render(request,"manager/record_upload.html")
+
+def register(request):
+    # user = User.objects.create()
+    return render(request,'manager/register.html')
    
 
 
