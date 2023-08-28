@@ -4,6 +4,26 @@
 {% block title %}
 {% endblock title%}
 
+<<<<<<< HEAD
+    <div class = "container">
+      <div class = "form-group">
+        <form method = "POST",
+          action = ""
+          enctype="multipart/form-data">
+          {% csrf_token %} 
+        <div class = "container" style =""> 
+           {{form}}
+          <button style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+             Submit Details 
+            </button>
+        </div>
+          
+          
+      </div> 
+    </div>  
+  </body>  
+<h3> The Records are Up To Date <h3> 
+=======
 {% block extrahead %}
 {% endblock extrahead %}
 
@@ -13,42 +33,38 @@
   <div class="container-fluid pt-5 bg-transparent">
     <h1>File Upload</h1>
     <div class="row">
-        <div class="col-md-5 border-end border-black text-center">
-        
-        <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-            <br>
-            <label for="file">Choose a file:</label>
-            <input type="file" name="file" id="file">
-            <br>
-            <button type="button" class="btn btn-primary" type="submit">Submit</button>
-        </form>
-        </div>
-        <div class="col-md-7">
-          <div class="container">
-            <div class="form-group">
-              <form method="POST">
-                {% csrf_token %}
-              <div class="container mt-4">
-                {{form}}
-    
-                <button type="button" class="btn btn-primary" type="submit">Submit</button>
-              </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        
-    </div>
+        <div class="col-md-5">
+  <h1>File Upload</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <label for="file">Choose a file:</label>
+    <input type="file" name="file" id="file">
+    <br>
+    <button type="submit">Upload</button>
+  </form>
   </div>
+</div></body>
 
 
 
-   
-  
+<div class="container">
+  <div class="form-group">
+    <form method="POST" , action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="container">
+        {{form}}
 
+        <button
+          style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+          Submit Details
+        </button>
+      </div>
+    </form>
 
-
+  </div>
+</div>
 </body>
+<h3> The Records are Up To Date <h3>
 
     {% endblock content %}
