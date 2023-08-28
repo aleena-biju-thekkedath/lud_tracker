@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+import datetime
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.shortcuts import render
@@ -12,16 +14,17 @@ from .models import UserProfile
 
 
 # Create your views here.
-# from .forms import CreateUserForm
+from .forms import CreateUserForm
 
 
 def home_manager(request):
     # user = User.objects.create()
-    return render(request,'manager/manager.html')
+    return render(request, 'manager/manager.html')
+
 
 def create_team(request):
-    return render(request,'manager/create_team.html')
- 
+    return render(request, 'manager/create_team.html')
+
 
 def process_uploaded_csv(request):
    
