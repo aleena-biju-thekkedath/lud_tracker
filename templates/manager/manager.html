@@ -8,31 +8,74 @@
 {% endblock extrahead %}
 
 {% block content %}
-<div class =" container">
 
-    <!-- Heading Content Here -->
-    <h1> Welcome, Project Manager <br> {Name of Manager}</h1>
-    <button type="button" class="btn btn-success">Assign New Team </button>
-</div>
+<!-- Heading content -->
+<div class="container-fluid pt-4 bg-transparent">
+  <div class="row">
+    <div class="col-md-6">
+      <h1 class="mx-5 mb-5 mt-3">Welcome, Team Manager!</h1>
 
-<div class="container text-center">
-    <div class="row align-items-start">
 
-      <!-- All Content of Column 1 here ! -->
-      
-        <div class="col g-3 text-start colbor_pad">  
-          
-          <h3> Current Projects </h3>      
-          <div class = "display-6"> Progress of Project 1 {} </div>
-          <div class = "display-6"> Progress of Project 2 {} </div>
-        </div>
-      
-    <!-- All Content of Column 1 here ! -->
-      <div class="col g-3 mx-3 order-2 colbor_pad">
-         <div class ="display-3"> Calendar </div>
+        <button class="button mx-5 mb-4 task-btn" type="button">Create Team</button>
+        <div class="row mx-5 mt-5">
+          <div class="container-progress p-3 col-md-12 " style="align-items: center;">
+              <h2 class="fs-3 mb-3 text-center mt-3">Task status</h2>
+              <ol class="mx-2">
+                  <li style="font-size: larger;" class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0" style="font-size: x-large;">Project 1</a>
+                    <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
+                      <div class="progress-bar" style="width: 25% ; background-color: #033b61;">25%</div>
+                    </div>
+                  </li>
+
+                  <li style="font-size: larger;"  class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 2</a>
+                    <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px; ">
+                      <div class="progress-bar" style="width: 25%; background-color: #033b61;">25%</div>
+                    </div>
+                  </li>
+
+                  <li style="font-size: larger;"  class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 3</a>
+                    <div class="progress mt-2 " role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
+                      <div class="progress-bar" style="width: 50% ; background-color: #033b61;">50%</div>
+                    </div>
+                  </li>
+
+              </ol>
+          </div>
+         
+
       </div>
-    </div>
-  </div>
-    
 
-{% endblock content %}
+            
+
+        <style>
+          .task-btn {
+
+            border: none;
+            background: #22577a;
+            color: #fff;
+            text-transform: uppercase;
+            padding: 20px 25px;
+            border-radius: 9px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            cursor: pointer;
+            -webkit-transition: all ease-in-out 300ms;
+            transition: all ease-in-out 300ms;
+          }
+
+          .task-btn:hover {
+            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+            -webkit-transform: translate(0px, -5px) scale(1);
+            transform: translate(0px, -5px) scale(1.1);
+          }
+
+          .progress{
+            border: 1px solid gray;
+          }
+
+          .container-progress{
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+            border-radius: 10px;
+            background-color: rgb(132, 183, 207);
+          }
+        </style>
+        {% endblock content %}
