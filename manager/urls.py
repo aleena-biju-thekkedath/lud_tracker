@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [
     path("",views.home_manager,name='manager-home'),
     path("team/",views.create_team, name = 'manager-create'),
-    path("record_mandate/",views.process_uploaded_csv, name = "manager-records"),
+    path("modal/",views.modal, name = "manager-modal"),
     path("register/",views.register, name = "register"),
 ]

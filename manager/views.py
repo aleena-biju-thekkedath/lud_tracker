@@ -19,6 +19,9 @@ def home_manager(request):
     # user = User.objects.create()
     return render(request, 'manager/manager.html')
 
+def modal(request):
+    # user = User.objects.create()
+    return render(request, 'manager/project_modal.html')
 
 def create_team(request):
     return render(request, 'manager/create_team.html')
