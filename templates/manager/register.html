@@ -8,6 +8,11 @@
 {% endblock extrahead %}
 
 {% block content %}
+<style>
+  .form-control {
+    width: 50%;
+  }
+  </style>
 
 
   <div class="container-fluid p-3 bg-transparent">
@@ -17,10 +22,12 @@
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           <br>
-          <label class="mx-5" for="file">Choose a file:</label>
-          <input type="file" name="file" id="file">
+          <label for="file" class="form-label mx-3">Input the file</label>
+          <input class="form-control mx-3" type="file" id="file" multiple /> 
+          <!-- <label class="mx-3" for="file">Choose a file:</label>
+          <input type="file" name="file" id="file"> -->
           <br>
-          <button class="mx-5" type="submit">Upload</button>
+          <button class="mx-3 btn btn-info" type="submit">Upload</button>
         </form>
       </div>
       
@@ -44,8 +51,9 @@
 
               <label class="mt-3" for="">{{form.password2.label}}</label>
               {{form.password2}}
-
-              <button class="mt-3">Submit Detail</button>
+              <br>
+              <br>
+              <button class="mx-1 btn btn-info" type="submit">Submit Details</button>
             </div>
             
           </form>
