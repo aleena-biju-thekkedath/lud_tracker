@@ -52,20 +52,6 @@ def process_uploaded_csv(request):
         return redirect('manager-home')
     else:
         return render(request, "manager/register.html")
-<<<<<<< HEAD
-   
-def register(request):
-    form = CreateUserForm()
-    if request.POST:
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-    context = {"form": form}
-    return render(request, 'manager/register.html', context)
-
-  
-=======
->>>>>>> 50cc9a1f5fa8cafc1d77c5dc55d81019d881a041
 
 
 def register(request):
