@@ -8,74 +8,139 @@
 {% endblock extrahead %}
 
 {% block content %}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb p-2 mx-2  rounded justify-content-center">
+    <!-- <li class="breadcrumb-item"><a class="text-black" href="#"> Home</a></li> -->
+    <li class="breadcrumb-item text-success" aria-current="page"><i>Home</i></div>
+    </li>
+  </ol>
+</nav>
 
 <!-- Heading content -->
 <div class="container-fluid pt-4 bg-transparent">
   <div class="row">
     <div class="col-md-6">
-      <h1 class="mx-5 mb-5 mt-3">Welcome, Team Manager!</h1>
+      <h1 class="mx-5 mb-5">Welcome, Team Manager!</h1>
 
 
-        <button class="button mx-5 mb-4 task-btn" type="button">Create Team</button>
-        <div class="row mx-5 mt-5">
-          <div class="container-progress p-3 col-md-12 " style="align-items: center;">
-              <h2 class="fs-3 mb-3 text-center mt-3">Task status</h2>
-              <ol class="mx-2">
-                  <li style="font-size: larger;" class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0" style="font-size: x-large;">Project 1</a>
-                    <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
-                      <div class="progress-bar" style="width: 25% ; background-color: #033b61;">25%</div>
+      <a href="{% url 'manager-create' %}" class="button mx-5 mb-4 task-btn" type="button">Create Team</a>
+
+      <div class="row mx-5 mt-5">
+        <div class="container-progress p-3 col-md-12 " style="align-items: center;">
+          <h2 class="fs-3 mb-3 text-center mt-3">Project status</h2>
+          <ol class="mx-2">
+            <li style="font-size: larger;" class="mb-4"><a href="#" class="link-dark link-underline-opacity-0"
+                style="font-size: x-large;" data-bs-toggle="modal" data-bs-target="#exampleModal">Project 1</a>
+
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Project Details</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" readonly></button>
                     </div>
-                  </li>
 
-                  <li style="font-size: larger;"  class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 2</a>
-                    <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px; ">
-                      <div class="progress-bar" style="width: 25%; background-color: #033b61;">25%</div>
+                    <div class="modal-body">
+                      <h6 class="text-primary-emphasis fw-bold">Project Name <i class="fa-solid fa-bookmark"></i></h6>
+                      <input type="text" class="form-control border border-secondary" placeholder="Title of the task" aria-label="title" readonly>
+
+                      <h6 class="text-primary-emphasis fw-bold mt-3">Project Description <i class="fa-solid fa-clipboard"></i></h6>  
+                      <textarea class="form-control border border-secondary" id="exampleFormControlTextarea1" rows="5" placeholder="Description" readonly></textarea>
+                     
+                      <h6 class="text-primary-emphasis fw-bold mt-3">Team Strength <i class="fa-solid fa-people-group"></i></h6>
+                      <input type="text" class="form-control border border-secondary" placeholder="Members" aria-label="title" readonly>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <h6 for="exampleFormControlDate1" class="text-primary-emphasis fw-bold mt-3">
+                            Start Date <i class="fa-regular fa-calendar-days"></i></h6>
+                          <input type="date" class="form-control border border-secondary" readonly placeholder="Start date" id="exampleFormControlDate1">
+                        </div>
+
+                        <div class="col-md-6">
+                          <h6 for="exampleFormControlDate2" class="text-primary-emphasis fw-bold mt-3">
+                            End Date <i class="fa-regular fa-calendar-days"></i></h6>
+                          <input type="date" class="form-control border border-secondary" readonly placeholder="Start date"id="exampleFormControlDate2">
+                        </div>
+
+                      </div>
                     </div>
-                  </li>
 
-                  <li style="font-size: larger;"  class="mb-4"><a href="" class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 3</a>
-                    <div class="progress mt-2 " role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 30px;">
-                      <div class="progress-bar" style="width: 50% ; background-color: #033b61;">50%</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">Add members</button>
+
                     </div>
-                  </li>
+                  </div>
 
-              </ol>
-          </div>
-         
+                </div>
+              </div>
+
+              <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                style="height: 30px;">
+                <div class="progress-bar" style="width: 25% ; background-color: #033b61;">25%</div>
+              </div>
+            </li>
+
+            <li style="font-size: larger;" class="mb-4"><a href=""
+                class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 2</a>
+              <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                style="height: 30px; ">
+                <div class="progress-bar" style="width: 25%; background-color: #033b61;">25%</div>
+              </div>
+            </li>
+
+            <li style="font-size: larger;" class="mb-4"><a href=""
+                class="link-dark link-underline link-underline-opacity-0 " style="font-size: x-large;">Project 3</a>
+              <div class="progress mt-2 " role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                style="height: 30px;">
+                <div class="progress-bar" style="width: 50% ; background-color: #033b61;">50%</div>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
 
       </div>
 
-            
+    </div>
 
-        <style>
-          .task-btn {
 
-            border: none;
-            background: #22577a;
-            color: #fff;
-            text-transform: uppercase;
-            padding: 20px 25px;
-            border-radius: 9px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-            cursor: pointer;
-            -webkit-transition: all ease-in-out 300ms;
-            transition: all ease-in-out 300ms;
-          }
 
-          .task-btn:hover {
-            box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-            -webkit-transform: translate(0px, -5px) scale(1);
-            transform: translate(0px, -5px) scale(1.1);
-          }
 
-          .progress{
-            border: 1px solid gray;
-          }
+    <style>
+      .task-btn {
 
-          .container-progress{
-            box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
-            border-radius: 10px;
-            background-color: rgb(132, 183, 207);
-          }
-        </style>
-        {% endblock content %}
+        border: none;
+        background: #22577a;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 20px 25px;
+        border-radius: 9px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        cursor: pointer;
+        -webkit-transition: all ease-in-out 300ms;
+        transition: all ease-in-out 300ms;
+      }
+
+      .task-btn:hover {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        -webkit-transform: translate(0px, -5px) scale(1);
+        transform: translate(0px, -5px) scale(1.1);
+      }
+
+      .progress {
+        border: 1px solid gray;
+      }
+
+      .container-progress {
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+        border-radius: 10px;
+        background-color: rgb(132, 183, 207);
+      }
+    </style>
+    {% endblock content %}

@@ -5,214 +5,11 @@
    {% block extrahead %}
     {% endblock extrahead %}
      {% block content %}
-<script>
-  // <![CDATA[
-  var colour = "#111111"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
-  var sparkles = 50;
-
-  var x = (ox = 400);
-  var y = (oy = 300);
-  var swide = 800;
-  var shigh = 600;
-  var sleft = (sdown = 0);
-  var tiny = new Array();
-  var star = new Array();
-  var starv = new Array();
-  var starx = new Array();
-  var stary = new Array();
-  var tinyx = new Array();
-  var tinyy = new Array();
-  var tinyv = new Array();
-
-  window.onload = function () {
-    if (document.getElementById) {
-      var i, rats, rlef, rdow;
-      for (var i = 0; i < sparkles; i++) {
-        var rats = createDiv(3, 3);
-        rats.style.visibility = "hidden";
-        rats.style.zIndex = "999";
-        document.body.appendChild((tiny[i] = rats));
-        starv[i] = 0;
-        tinyv[i] = 0;
-        var rats = createDiv(5, 5);
-        rats.style.backgroundColor = "transparent";
-        rats.style.visibility = "hidden";
-        rats.style.zIndex = "999";
-        var rlef = createDiv(1, 5);
-        var rdow = createDiv(5, 1);
-        rats.appendChild(rlef);
-        rats.appendChild(rdow);
-        rlef.style.top = "2px";
-        rlef.style.left = "0px";
-        rdow.style.top = "0px";
-        rdow.style.left = "2px";
-        document.body.appendChild((star[i] = rats));
-      }
-      set_width();
-      sparkle();
-    }
-  };
-
-  function sparkle() {
-    var c;
-    if (Math.abs(x - ox) > 1 || Math.abs(y - oy) > 1) {
-      ox = x;
-      oy = y;
-      for (c = 0; c < sparkles; c++)
-        if (!starv[c]) {
-          star[c].style.left = (starx[c] = x) + "px";
-          star[c].style.top = (stary[c] = y + 1) + "px";
-          star[c].style.clip = "rect(0px, 5px, 5px, 0px)";
-          star[c].childNodes[0].style.backgroundColor = star[
-            c
-          ].childNodes[1].style.backgroundColor =
-            colour == "random" ? newColour() : colour;
-          star[c].style.visibility = "visible";
-          starv[c] = 50;
-          break;
-        }
-    }
-    for (c = 0; c < sparkles; c++) {
-      if (starv[c]) update_star(c);
-      if (tinyv[c]) update_tiny(c);
-    }
-    setTimeout("sparkle()", 30);
-  }
-
-  function update_star(i) {
-    if (--starv[i] == 25) star[i].style.clip = "rect(11px, 14px, 14px, 11px)";
-    if (starv[i]) {
-      stary[i] += 1 + Math.random() * 3;
-      starx[i] += ((i % 5) - 2) / 5;
-      if (stary[i] < shigh + sdown) {
-        star[i].style.top = stary[i] + "px";
-        star[i].style.left = starx[i] + "px";
-      } else {
-        star[i].style.visibility = "hidden";
-        starv[i] = 0;
-        return;
-      }
-    } else {
-      tinyv[i] = 50;
-      tiny[i].style.top = (tinyy[i] = stary[i]) + "px";
-      tiny[i].style.left = (tinyx[i] = starx[i]) + "px";
-      tiny[i].style.width = "2px";
-      tiny[i].style.height = "2px";
-      tiny[i].style.backgroundColor =
-        star[i].childNodes[0].style.backgroundColor;
-      star[i].style.visibility = "hidden";
-      tiny[i].style.visibility = "visible";
-    }
-  }
-
-  function update_tiny(i) {
-    if (--tinyv[i] == 25) {
-      tiny[i].style.width = "1px";
-      tiny[i].style.height = "1px";
-    }
-    if (tinyv[i]) {
-      tinyy[i] += 1 + Math.random() * 3;
-      tinyx[i] += ((i % 5) - 2) / 5;
-      if (tinyy[i] < shigh + sdown) {
-        tiny[i].style.top = tinyy[i] + "px";
-        tiny[i].style.left = tinyx[i] + "px";
-      } else {
-        tiny[i].style.visibility = "hidden";
-        tinyv[i] = 0;
-        return;
-      }
-    } else tiny[i].style.visibility = "hidden";
-  }
-
-  document.onmousemove = mouse;
-  function mouse(e) {
-    if (e) {
-      y = e.pageY;
-      x = e.pageX;
-    } else {
-      set_scroll();
-      y = event.y + sdown;
-      x = event.x + sleft;
-    }
-  }
-
-  window.onscroll = set_scroll;
-  function set_scroll() {
-    if (typeof self.pageYOffset == "number") {
-      sdown = self.pageYOffset;
-      sleft = self.pageXOffset;
-    } else if (
-      document.body &&
-      (document.body.scrollTop || document.body.scrollLeft)
-    ) {
-      sdown = document.body.scrollTop;
-      sleft = document.body.scrollLeft;
-    } else if (
-      document.documentElement &&
-      (document.documentElement.scrollTop ||
-        document.documentElement.scrollLeft)
-    ) {
-      sleft = document.documentElement.scrollLeft;
-      sdown = document.documentElement.scrollTop;
-    } else {
-      sdown = 0;
-      sleft = 0;
-    }
-  }
-
-  window.onresize = set_width;
-  function set_width() {
-    var sw_min = 999999;
-    var sh_min = 999999;
-    if (document.documentElement && document.documentElement.clientWidth) {
-      if (document.documentElement.clientWidth > 0)
-        sw_min = document.documentElement.clientWidth;
-      if (document.documentElement.clientHeight > 0)
-        sh_min = document.documentElement.clientHeight;
-    }
-    if (typeof self.innerWidth == "number" && self.innerWidth) {
-      if (self.innerWidth > 0 && self.innerWidth < sw_min)
-        sw_min = self.innerWidth;
-      if (self.innerHeight > 0 && self.innerHeight < sh_min)
-        sh_min = self.innerHeight;
-    }
-    if (document.body.clientWidth) {
-      if (document.body.clientWidth > 0 && document.body.clientWidth < sw_min)
-        sw_min = document.body.clientWidth;
-      if (document.body.clientHeight > 0 && document.body.clientHeight < sh_min)
-        sh_min = document.body.clientHeight;
-    }
-    if (sw_min == 999999 || sh_min == 999999) {
-      sw_min = 800;
-      sh_min = 600;
-    }
-    swide = sw_min;
-    shigh = sh_min;
-  }
-
-  function createDiv(height, width) {
-    var div = document.createElement("div");
-    div.style.position = "absolute";
-    div.style.height = height + "px";
-    div.style.width = width + "px";
-    div.style.overflow = "hidden";
-    return div;
-  }
-
-  function newColour() {
-    var c = new Array();
-    c[0] = 255;
-    c[1] = Math.floor(Math.random() * 256);
-    c[2] = Math.floor(Math.random() * (256 - c[1] / 2));
-    c.sort(function () {
-      return 0.5 - Math.random();
-    });
-    return "rgb(" + c[0] + ", " + c[1] + ", " + c[2] + ")";
-  }
-  // ]]>
-</script>
+     <div id="container">
+      <canvas id="canvas"></canvas>
+    </div>
 <div class="login-box">
-  <h2>Login</h2>
+  <h2 class="animate__animated animate__pulse">Login</h2>
   <form method="post">
     {% csrf_token %}
     <div class="user-box">
@@ -223,20 +20,38 @@
       <input type="password" name="password" required="" />
       <label>Password</label>
     </div>
-    <button style="font-weight: 600;" type="submit">
+    <a href="https://codepen.io/Marvelle/full/YzQqmGr">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
       Submit
-    </button>
-    <!-- <a href="#" style="font-weight: 600;">
-      
-      
-    </a> -->
+    </a>
   </form>
+ 
 
   <style>
+   @import url(https://fonts.googleapis.com/css?family=Raleway);
+body {
+  background-color: #eee;
+  min-height: 100%;
+  color: #fff;
+  background-image: url("http://isaacsuttell.com/img/justine.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: Raleway, sans-serif;
+}
+
+#title {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  z-index: 100;
+  color: #fff;
+}
+
     html {
       height: 100%;
     }
@@ -244,7 +59,7 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background: linear-gradient(rgb(169, 230, 238), #ffffff);
+      background: linear-gradient(rgb(169, 230, 238), #c0eebf);
     }
 
     .login-box {
@@ -407,5 +222,327 @@
       }
     }
   </style>
+  <script>
+   function Animate(canvas, options) {
+     this.canvas = canvas;
+     this.options = defaults(options || {}, this.options);
+     this.init();
+   }
+   
+   /**
+    * Default options
+    */
+   Animate.prototype.options = {
+     density: 25, // Affects how many poitns are created
+     speed: 10, // Time in seconds to shift points
+     sync: false, // Should points move in sync
+     distance: 100, // Distance to move points
+     lineColor: '0, 0, 0',
+     circleColor: '51, 102, 255',
+     radius: 5,
+     lineWidth: 1,
+     lines: 3,  // Number of closest lines to draw
+     updateClosest : false, // Update closet points each loop
+     mouse: true, // Link to mouse or random
+   
+   };
+   
+   /**
+    * Setup everything
+    */
+   Animate.prototype.init = function(){
+     this.width = window.innerWidth;
+     this.height = window.innerHeight;
+     this.target = {
+       position: {
+         x: this.width / 2,
+         y: this.height / 2
+       }
+     };
+   
+     // Setup canvas
+     this.canvas.width = this.width;
+     this.canvas.height = this.height;
+   
+     this.ctx = canvas.getContext('2d');
+   
+     window.addEventListener('resize', this.resize.bind(this));
+   
+     if(this.options.mouse === true && !('ontouchstart' in window) ) {
+        window.addEventListener('mousemove', this.mousemove.bind(this));
+     }
+   
+     this.points = [];
+     for(var x = 0; x < this.width; x = x + this.width / this.options.density) {
+       for(var y = 0; y < this.height; y = y + this.height/ this.options.density) {
+         var point = new Point({
+           x: x + Math.random() * this.width/ this.options.density,
+           y: y + Math.random() * this.height/this.options.density
+         }, this.ctx, this.points.length + 1, this.options);
+         this.points.push(point);
+       }
+     }
+   
+     // Setup Circles
+     for(var i in this.points) {
+       this.points[i].circle = new Circle(this.points[i], this.ctx, this.options);
+     }
+   
+     this.findClosest(); // Points
+   
+     this.animate(); // Start the loop
+   
+     this.shiftPoints(); // Start the tween loop
+   
+     if(this.options.mouse === false) {
+       this.moveTarget(); // Start the random target loop
+     }
+   
+   };
+   
+   /*
+    * Cycles through each Point and finds its neighbors
+    */
+   Animate.prototype.findClosest = function() {
+     for(var i = 0; i < this.points.length; i++) {
+       // Save the point
+       var point = this.points[i];
+       // Reset
+       point.closest = [];
+       // Cycle through the others
+       for(var j = 0; j < this.points.length; j++) {
+         // Point to test
+         var testPoint = this.points[j];
+         if(point.id !== testPoint.id) {
+           var placed = false, k;
+           for (k = 0; k < this.options.lines; k ++) {
+             if(!placed) {
+               if(typeof point.closest[k] === 'undefined') {
+                 point.closest[k] = testPoint;
+                 placed = true;
+               }
+             }
+           }
+   
+           for(k = 0; k < this.options.lines; k++){
+             if(!placed) {
+               if(point.distanceTo(testPoint) < point.distanceTo(point.closest[k])) {
+                 point.closest[k] = testPoint;
+                 placed = true;
+               }
+             }
+           }
+         }
+       }
+     }
+   };
+   
+   /**
+    * Animation Loop
+    */
+   Animate.prototype.animate = function() {
+     var i;
+     // Should we recalucate closest?
+     if(this.options.updateClosest) {
+       this.findClosest();
+     }
+   
+     // Calculate Opacity
+     for(i in this.points) {
+       if(this.points[i].distanceTo(this.target, true) < 5000) {
+          this.points[i].opacity = 0.4;
+          this.points[i].circle.opacity = 0.6;
+       } else if (this.points[i].distanceTo(this.target, true) < 10000) {
+          this.points[i].opacity = 0.2;
+          this.points[i].circle.opacity = 0.3;
+       } else if (this.points[i].distanceTo(this.target, true) < 30000) {
+          this.points[i].opacity = 0.1;
+          this.points[i].circle.opacity = 0.2;
+       } else {
+          this.points[i].opacity = 0.05;
+          this.points[i].circle.opacity = 0.05;
+       }
+     }
+      // Clear
+     this.ctx.clearRect(0, 0, this.width, this.height);
+     for(i in this.points) {
+   
+       this.points[i].drawLines();
+       this.points[i].circle.draw();
+     }
+    // Loop
+    window.requestAnimationFrame(this.animate.bind(this));
+   };
+   
+   /**
+    * Starts each point in tween loop
+    */
+   Animate.prototype.shiftPoints = function() {
+     for(var i in this.points) {
+       this.points[i].shift();
+     }
+   };
+   
+   
+   /**
+    * Make sure the canvas is the right size
+    */
+   Animate.prototype.resize = function() {
+     this.width = window.innerWidth;
+     this.height = window.innerHeight;
+     this.canvas.width = this.width;
+     this.canvas.height = this.height;
+   };
+   
+   /**
+    * Mouse Move Event - Moves the target with the mouse
+    * @param    event   {Object}   Mouse event
+    */
+   Animate.prototype.mousemove = function(event) {
+     if(event.pageX || event.pageY) {
+       this.target.position.x = event.pageX;
+       this.target.position.y = event.pageY;
+     } else if(event.clientX || event.clientY) {
+       this.target.position.x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+       this.target.position.y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+     }
+   };
+   
+   /**
+    * Randomly move the target
+    */
+   Animate.prototype.moveTarget = function() {
+     var _this = this;
+     TweenLite.to(this.target.position, 2, {
+       x : (Math.random() * (this.width - 200)) + 100,
+       y : (Math.random() * (this.height - 200)) + 100,
+       ease: Expo.easeInOut,
+       onComplete: function() {
+         _this.moveTarget();
+       }
+     });
+   };
+   
+   /**
+    * Point Constructor
+    * @param    position   {Object}     set of x and u coords
+    * @param    ctx        {Object}     Canvas context to draw on
+    * @param    options    {Object}     options passed from main function
+    */
+   function Point(position, ctx, id, options) {
+     this.options = options || {};
+     this.id = id;
+     this.ctx = ctx;
+     this.position = position || {x: 0, y: 0};
+     this.origin = {
+       x: this.position.x,
+       y: this.position.y
+     };
+     this.opacity = 0;
+     this.closest = [];
+   }
+   
+   /**
+    * Caluclates the distance to another point
+    * @param    point    {Object}    Another Point
+    * @param    abs      {Boolean}   Return the absolute value or not
+    * @returns  {Number}
+    */
+   Point.prototype.distanceTo = function(point, abs) {
+     abs = abs || false;
+     var distance = Math.pow(this.position.x - point.position.x, 2) + Math.pow(this.position.y - point.position.y, 2);
+     return abs ? Math.abs(distance) : distance;
+   };
+   
+   /**
+    *  Draws lines to the closet points
+    */
+   Point.prototype.drawLines = function() {
+     for(var i in this.closest) {
+       if(this.opacity  > 0) {
+         this.ctx.beginPath();
+         this.ctx.moveTo(this.position.x, this.position.y);
+          var test = i + 1;
+         if(!this.closest[test]) {
+           test = 0;
+         }
+         this.ctx.lineCap = 'round';
+         this.ctx.strokeStyle = 'rgba(' + this.options.lineColor + ', ' + this.opacity + ')';
+          this.ctx.lineWidth = this.options.lineWidth;
+   
+   
+         this.ctx.lineTo(this.closest[i].position.x, this.closest[i].position.y);
+   
+         this.ctx.stroke();
+       }
+     }
+   };
+   
+   /**
+    * Tween loop to move each point around it's origin
+    */
+   Point.prototype.shift = function() {
+     var _this = this,
+          speed = this.options.speed;
+   
+     // Random the time a little
+     if(this.options.sync !== true) {
+       speed -= this.options.speed * Math.random();
+     }
+     TweenLite.to(this.position, speed, {
+       x : (this.origin.x - (this.options.distance/2) + Math.random() * this.options.distance),
+       y : (this.origin.y - (this.options.distance/2) + Math.random() * this.options.distance),
+       ease: Expo.easeInOut,
+       onComplete: function() {
+         _this.shift();
+       }
+     });
+   };
+   
+   /**
+    * Circle Constructor
+    * @param    point   {Object}    Point object
+    * @param    ctx     {Object}    Context to draw on
+    * @param    options {Object}    options passed from main function
+    */
+   function Circle(point, ctx, options) {
+     this.options = options || {};
+     this.point = point || null;
+     this.radius = this.options.radius || null;
+     this.color = this.options.color || null;
+     this.opacity = 0;
+     this.ctx = ctx;
+   }
+   
+   
+   /**
+    * Draws Circle to context
+    */
+   Circle.prototype.draw = function() {
+     if(this.opacity > 0) {
+       this.ctx.beginPath();
+       this.ctx.arc(this.point.position.x, this.point.position.y, this.options.radius, 0, 2 * Math.PI, false);
+       this.ctx.fillStyle = 'rgba(' + this.options.circleColor + ', ' + this.opacity + ')';
+       this.ctx.fill();
+     }
+   };
+   
+   // Get the balls rolling
+   new Animate(document.getElementById('canvas'));
+   
+   
+   /**
+    * Utility Function to set default options
+    * @param    object    {object}
+    * @param    src  {object}
+    */
+   function defaults(object, src) {
+     for(var i in src) {
+       if(typeof object[i] === 'undefined') {
+         object[i] = src[i];
+       }
+     }
+     return object;
+   }</script>
 </div>
 {% endblock content %}

@@ -1,15 +1,13 @@
-from django.shortcuts import render,redirect
 import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.shortcuts import render
-# from django.utils.timezone import get_current_timezone
+from django.utils.timezone import get_current_timezone
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import make_password
+import csv
 from lud_tracker import settings
-from django.http import HttpResponse
-from .models import UserProfile
 # from django.contrib.auth.forms import UserCreationForm
 
 
@@ -21,6 +19,9 @@ def home_manager(request):
     # user = User.objects.create()
     return render(request, 'manager/manager.html')
 
+def modal(request):
+    # user = User.objects.create()
+    return render(request, 'manager/project_modal.html')
 
 def create_team(request):
     return render(request, 'manager/create_team.html')
@@ -51,6 +52,7 @@ def process_uploaded_csv(request):
         return redirect('manager-home')
     else:
         return render(request, "manager/register.html")
+<<<<<<< HEAD
    
 def register(request):
     form = CreateUserForm()
@@ -62,7 +64,15 @@ def register(request):
     return render(request, 'manager/register.html', context)
 
   
+=======
+>>>>>>> 50cc9a1f5fa8cafc1d77c5dc55d81019d881a041
 
 
-      
-
+def register(request):
+    form = CreateUserForm()
+    if request.POST:
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {"form": form}
+    return render(request, 'manager/register.html', context)
