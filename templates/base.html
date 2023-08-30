@@ -40,10 +40,12 @@
     crossorigin="anonymous"></script>
   <script
     src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
-  
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
  <div id="container">
   <canvas id="canvas"></canvas>
-</div> 
+</div>  
 </body>
 
 <script>
@@ -68,11 +70,19 @@
   </script>
 
  <style>
+  .my-element {
+  display: inline-block;
+  margin: 0 0.5rem;
+
+  animation: bounce; 
+  animation-duration: 10s; 
+}
   @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
-  background-color: #cff3ce;
+  background-color: #fafafa;
   min-height: 100%;
 
+  color: #000000;
   background-image: url("http://isaacsuttell.com/img/justine.jpg");
   background-size: cover;
   background-position: center;
@@ -86,7 +96,7 @@ body {
   font-size: 20px;
   letter-spacing: 0.1em;
   z-index: 100;
-  color: #c7f7d7;
+  color: #000000;
 }
 
   .navbar {
@@ -124,5 +134,25 @@ body {
 
 
 </style>
+<script> 
+  $(document).ready(function () {
+  // Initialize datatable with search functionality, pagination, and icons
+  $('#myTable').DataTable({
+    searching: true,
+    ordering: true,
+    paging: true,
+    pageLength: 10,
+    dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+      '<"row"<"col-sm-12"tr>>' +
+      '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+    language: {
+      paginate: {
+        previous: '<i class="fas fa-chevron-left"></i>',
+        next: '<i class="fas fa-chevron-right"></i>'
+      }
+    }
+  })
+});
+  </script>
 
 </html>
