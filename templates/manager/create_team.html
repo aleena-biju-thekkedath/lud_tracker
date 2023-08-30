@@ -44,11 +44,13 @@
 
   }
   
+
+  
 </style>
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb p-2 mx-2  rounded justify-content-center">
-      <li class="breadcrumb-item"><a class="text-black" href="#"> Home</a></li>
+      <li class="breadcrumb-item"><a class="text-black" href="{% url 'manager-home' %}"> Home</a></li>
       <li class="breadcrumb-item text-success" aria-current="page"><i>Teams</i></div></li>
   </ol>
   </nav>
@@ -58,7 +60,7 @@
   <!-- Heading Content Here -->
   <h1 class="mb-2 text-center">Team Creation</h1>
   <!-- <button type="button" class="btn btn-success">Assign New Team </button> -->
-  <div class="blur-rule"></div>
+  
 
   <!-- Contents for the Dropdown Box for number of Members -->
 
@@ -138,31 +140,35 @@
     <form>
       <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
       <div class="form-group  mt-3">
-        <label for="exampleFormControlInput2" class="mb-1">Project Title</label>
-        <input type="text" class="form-control border  border-black" id="exampleFormControlInput2" placeholder="Title">
+        <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i class="fa-solid fa-bookmark"></i></label>
+        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2" placeholder="Title">
 
       </div>
       <div class="form-group mt-2">
-        <label for="exampleFormControlTextarea1" class="mb-1">Project Description</label>
-        <textarea class="form-control mb-1 border border-black" id="exampleFormControlTextarea1" rows="5"
+        <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i class="fa-solid fa-clipboard"></i></label>
+        <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
           placeholder="Description"></textarea>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-6 form-group mt-2">
-          <label for="exampleFormControlDate1" class="mb-1">Start Date</label>
-          <input type="date" class="form-control border border-black" placeholder="Start date" id="exampleFormControlDate1">
+          <label for="exampleFormControlDate1" class="mb-1 fw-bold">Start Date <i class="fa-regular fa-calendar-days"></i></label>
+          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="exampleFormControlDate1">
         </div>
         <div class="col-md-6 form-group mt-2">
-          <label for="exampleFormControlDate2" class="mb-1">End Date</label>
-          <input type="date" class="form-control border border-black" placeholder="Start date" id="exampleFormControlDate2">
+          <label for="exampleFormControlDate2" class="mb-1 fw-bold">End Date <i class="fa-regular fa-calendar-days"></i></label>
+          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="exampleFormControlDate2">
         </div>
       </div>
 
     </form>
   </div>
-  <button class="btn btn-lg float-end mb-4" style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
-
+  
+   
+  
+  <button class="btn btn-lg float-end mx-2 border border-secondary" style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
+  <!-- <button class="btn btn-lg float-end mb-4 btn-secondary" style="color: white; size: 50px;" type="button"><a href="{% url 'manager-create' %}">Back</a></button> -->
+  <a href="{% url 'manager-home' %}" class="btn btn-lg float-end btn-secondary border border-secondary" style="color: white; size: 50px;" type="button">Back</a>
 </div>
 
 
