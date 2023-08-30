@@ -9,16 +9,22 @@
 
 {% block content %}
 
-<ol class="breadcrumb p-3">
-    <li class="breadcrumb-item active"><i class="fa-solid fa-house"></i><a href="#"> Home</a></li>
-    <li class="breadcrumb-item" aria-current="page">Leads</li>
+<style>
 
-  </ol>
+</style>
 
-<div class="container-fluid pt-4 bg-transparent">
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<ol class="breadcrumb p-2 mx-2  rounded justify-content-center">
+    <!-- <li class="breadcrumb-item"><a class="text-black" href="#"> Home</a></li> -->
+    <li class="breadcrumb-item text-success" aria-current="page"><i>Home</i></div></li>
+</ol>
+</nav>
+
+
+<div class="container-fluid pt-1 bg-transparent">
     <div class="row">
         <div class="col-md-6">
-            <h1 class="mx-5 mb-5 mt-3">Welcome, Team Lead!</h1>
+            <h1 class=" mx-5 mb-5 mt-3">Welcome, Team Lead!</h1>
 
             <!-- Modal -->
             <div class="modal fade modal-lg" id="exampleModalToggle" aria-hidden="true"

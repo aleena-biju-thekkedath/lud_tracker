@@ -6,26 +6,27 @@
 {% endblock extrahead %}
 {% block content %}
 
-<style>@import url("https://code.highcharts.com/css/highcharts.css");
+<style>
+    @import url("https://code.highcharts.com/css/highcharts.css");
 
     #container {
         max-width: 500px;
         margin: 1em auto;
         -ms-flex-align: end;
     }
-    
+
     .highcharts-treegrid-node-level-1 {
         font-size: 13px;
         font-weight: bold;
     }
-    </style>
-    
+</style>
+
 <body>
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
     <script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
-    
+
     <div id="container"></div>
-    
+
     <div class="container-fluid pt-5 bg-transparent">
         <div class="row">
             <div class="col-md-5">
@@ -35,44 +36,41 @@
                         class="fa-solid fa-handshake"></i></h1>
                 <div class="container mx-5">
                     <form>
-                        
-                            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                                <h6 class="text-primary-emphasis fw-bold">Title <i
-                                        class="fa-solid fa-bars-progress"></i></h6>
-                                <input type="text" class="form-control" placeholder="Title of the task"
-                                    aria-label="title" readonly>
-                            </div>
+
+                        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <h6 class="text-primary-emphasis fw-bold">Title <i class="fa-solid fa-bars-progress"></i>
+                            </h6>
+                            <input type="text" class="form-control" placeholder="Title of the task" aria-label="title"
+                                readonly>
+                        </div>
 
 
-                            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                                <h6 class="text-primary-emphasis fw-bold">Description <i class="fa-solid fa-pen"></i>
-                                </h6>
-                                <input type="text" class="form-control" placeholder="Describe the task"
-                                    aria-label="title" readonly>
-                            </div>
+                        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <h6 class="text-primary-emphasis fw-bold">Description <i class="fa-solid fa-pen"></i>
+                            </h6>
+                            <input type="text" class="form-control" placeholder="Describe the task" aria-label="title"
+                                readonly>
+                        </div>
 
 
-                           
-                                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                                        <div class="row">
-                                            <div class="col-md-6 form-group mt-2">
-                                                <label for="exampleFormControlDate1" class="text-primary-emphasis fw-bold">Start Date <i class="fa-regular fa-calendar-days"></i></label>
-                                            <input type="date" class="form-control" placeholder="Start date" id="exampleFormControlDate1" readonly>
-                                            </div>
-                                            <div class="col-md-6 form-group mt-2">
-                                                <label for="exampleFormControlDate2" class="text-primary-emphasis fw-bold">End Date <i class="fa-regular fa-calendar-days"></i></label>
-                                            <input type="date" class="form-control" placeholder="Start date" id="exampleFormControlDate2" readonly>
-                                            </div>
-                                        </div> 
-                                
+
+                        <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+                            <div class="row">
+                                <div class="col-md-6 form-group mt-2">
+                                    <label for="exampleFormControlDate1" class="text-primary-emphasis fw-bold">Start
+                                        Date <i class="fa-regular fa-calendar-days"></i></label>
+                                    <input type="date" class="form-control" placeholder="Start date"
+                                        id="exampleFormControlDate1" readonly>
                                 </div>
-                                
-
-                        
-
+                                <div class="col-md-6 form-group mt-2">
+                                    <label for="exampleFormControlDate2" class="text-primary-emphasis fw-bold">End Date
+                                        <i class="fa-regular fa-calendar-days"></i></label>
+                                    <input type="date" class="form-control" placeholder="Start date"
+                                        id="exampleFormControlDate2" readonly>
+                                </div>
+                            </div>
+                        </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
