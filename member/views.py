@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate,login
 def home_member(request):
     return render(request,'member/member.html')
 
+def comments(request):
+    return render(request,'comments.html')
+
 def login_page(request):
     if request.method=='POST':
         username =request.POST.get('Username')
