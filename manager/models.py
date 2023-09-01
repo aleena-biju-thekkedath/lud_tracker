@@ -17,6 +17,7 @@ class Project(models.Model):
     proj_lead_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE,related_name = "proj_lead_id")
     proj_updated_start_date = models.DateField()
     proj_updated_end_date = models.DateField()
+    proj_desc = models.CharField(max_length = 1000,default= "NA")
 
 class Tasks(models.Model):
     date_created = models.DateTimeField()

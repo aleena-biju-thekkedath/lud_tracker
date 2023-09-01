@@ -19,7 +19,9 @@ def modal(request):
 
 # Create Team Page :
 def create_team(request):
-    return render(request, 'manager/create_team.html')
+    users = User.objects.all()
+    print(users)
+    return render(request,"manager/create_team.html",{'users': users})
 
 
 # For Processing the Csv File uploaded by Manager: 
@@ -74,34 +76,33 @@ def register_single(request):
             messages.error(request, "Passwords do not match")
             return redirect('register')  # Redirect back to the form page
         
-        # Continue processing the form data
-        
-        messages.success(request, "Form submitted successfully")
-        return redirect('register')  # Redirect to a success page
-    
-    if role.lower() == "manager":
-        user = User.objects.create(username = name,email =email,password = password,is_superuser= True)
-        userProfile = UserProfile.objects.create(role=role)
-        user.save()
-        userProfile.save()
-        return render(request, 'manager/register.html')
-        
-    elif role.lower()== "member":
-        user = User.objects.create(username = name,email =email,password = password)
-        userProfile = UserProfile.objects.create(role=role)
-        user.save()
-        userProfile.save()
-        return render(request, 'manager/register.html')
-        
-    else: 
-        messages.error(request, "Form Submission Unsuccesful, Try Registering Again")
-        return redirect('register')
+        if role.lower() == "manager":
+            user = User.objects.create(username=name,email =email,password = password,is_superuser= True)
+            user.save()
+            userProfile = UserProfile.objects.create(role=role,user=user)
+            userProfile.save()
+            messages.success(request, "Profile Uploaded Successfully ")
+            return redirect('register') 
+            
+        elif role.lower()== "member":
+            user = User.objects.create(username = name,email =email,password = password)
+            userProfile = UserProfile.objects.create(role=role,user=user)
+            user.save()
+            userProfile.save()
+            messages.success(request, "Profile Uploaded Successfully ")
+            return redirect(request, 'manager/register.html')
+            
+    return render(request, 'manager/register.html')
 
 
-# This Format is if Django Forms.Py Is Used: 
+def project_details(request):
+    if request.method == 'POST':
+        user = request.user
+        proj_name = request.POST.get('proj_name')
+        proj_desc = request.POST.get('proj_desc')
+        proj_start = request.POST.get('proj_start')
+        proj_end= request.POST.get('proj_end') 
+        proj_manager_id = user.id
+        proj_lead_id = request.post.get()
 
 
-    # form = CreateUserForm(request.POST)
-    # if form.is_valid():
-    # form.save()
-    # context = {"form": form}

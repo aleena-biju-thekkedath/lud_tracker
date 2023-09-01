@@ -43,10 +43,10 @@
     box-shadow: 0 0 1px 0 #666;
 
   }
-  
-
-  
+   
 </style>
+
+
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb p-2 mx-2  rounded justify-content-center">
@@ -65,8 +65,8 @@
   <!-- Contents for the Dropdown Box for number of Members -->
 
   <div class="select mt-5 mb-5">
-    <h5 class="mt-1 mx-2">Number of members <i class="fa-solid fa-caret-right pt-1"></i></h5>
-    <select class="select-items">
+    <h5 class="mt-1 mx-2">Number of members <i class="fa-solid fa-caret-right pt-1" required></i></h5>
+    <select class="select-items" id="memberCount">
       <option value="*" disabled selected>Please select...</option>
       <option value="1">1</option>
       <option value="2">2</option>
@@ -82,43 +82,23 @@
   <div class="container-table p-3 rounded mt-3 mb-4 border border-black">
     <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
 
-
     <table id="myTable" class="display p-1 rounded border">
-      <thead>
-        <tr>
-          <th>Member Name</th>
-          <th>Add to Team</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>M1</td>
-          <td><input type="checkbox"></td>
-        </tr>
-        <tr>
-          <td>M2</td>
-          <td><input type="checkbox"></td>
-        </tr>
-        <tr>
-          <td>M3</td>
-          <td><input type="checkbox"></td>
-        </tr>
-        <tr>
-          <td>M4</td>
-          <td><input type="checkbox"></td>
-        </tr>
-        <tr>
-          <td>M5</td>
-          <td><input type="checkbox"></td>
-        </tr>
-        <tr>
-          <td>M6</td>
-          <td><input type="checkbox"></td>
-        </tr>
-
-      </tbody>
+        <thead>
+            <tr>
+                <th>Member Name</th>
+                <th>Add to Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td><input type="checkbox" class="team-member-checkbox"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-  </div>
+</div>
 
 
   <div class="select mt-5 mb-5">
@@ -137,27 +117,29 @@
 
 
   <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
-    <form>
+    <form method = "post">
       <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
       <div class="form-group  mt-3">
         <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i class="fa-solid fa-bookmark"></i></label>
-        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2" placeholder="Title">
+        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2" placeholder="Title" name = "proj_name">
 
       </div>
       <div class="form-group mt-2">
         <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i class="fa-solid fa-clipboard"></i></label>
         <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
-          placeholder="Description"></textarea>
+          placeholder="Description" name = "proj_desc"></textarea>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-6 form-group mt-2">
           <label for="exampleFormControlDate1" class="mb-1 fw-bold">Start Date <i class="fa-regular fa-calendar-days"></i></label>
-          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="exampleFormControlDate1">
+          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="examleFormControlDate1"
+          name = "proj_start">
         </div>
         <div class="col-md-6 form-group mt-2">
           <label for="exampleFormControlDate2" class="mb-1 fw-bold">End Date <i class="fa-regular fa-calendar-days"></i></label>
-          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="exampleFormControlDate2">
+          <input type="date" class="form-control border border-secondary" placeholder="Start date" id="exampleFormControlDate2"
+          name = "proj_end">
         </div>
       </div>
 
@@ -174,6 +156,34 @@
 
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+      $('#memberCount').change(function() {
+          var selectedCount = parseInt($(this).val());
+          var $checkboxes = $('#myTable tbody .team-member-checkbox');
+          
+          $checkboxes.prop('disabled', false);
+          
+          // if (selectedCount > 0) {
+          //     $checkboxes.prop('checked', false);
+          //     $checkboxes.slice(selectedCount).prop('disabled', true);
+          // }
+      });
 
-
+      $('#myTable tbody .team-member-checkbox').change(function() {
+          // var selectedCount = parseInt($('#memberCount').val());
+          var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
+          console.log($checkedCheckboxes.length);
+            console.log($selectedCount)
+          if ($checkedCheckboxes.length >= selectedCount) {
+            console.log($checkedCheckboxes.length);
+            console.log($selectedCount)
+              $('#myTable tbody .team-member-checkbox:not(:checked)').prop('disabled', true);
+          } else {
+              $('#myTable tbody .team-member-checkbox:not(:checked)').prop('disabled', false);
+          }
+      });
+  });
+</script>
 {% endblock content %}
