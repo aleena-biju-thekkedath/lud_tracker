@@ -51,7 +51,7 @@ def process_uploaded_csv(request):
             
             else:
                 user = User(username=fields[0], email=fields[1],
-                password=make_password(fields[2]))
+                        password=make_password(fields[2]))
                 user.save()
             
             
@@ -95,6 +95,7 @@ def register_single(request):
     return render(request, 'manager/register.html')
 
 
+
 def project_details(request):
     if request.method == 'POST':
         user = request.user
@@ -104,5 +105,9 @@ def project_details(request):
         proj_end= request.POST.get('proj_end') 
         proj_manager_id = user.id
         proj_lead_id = request.post.get()
+
+from django.shortcuts import render
+
+
 
 
