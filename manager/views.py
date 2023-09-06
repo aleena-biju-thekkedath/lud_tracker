@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.db import models
 from django.contrib.auth.models import User 
+from .models import Project
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import make_password
 from lud_tracker import settings
@@ -18,10 +20,7 @@ def modal(request):
     return render(request, 'manager/project_modal.html')
 
 # Create Team Page :
-def create_team(request):
-    users = User.objects.all()
-    print(users)
-    return render(request,"manager/create_team.html",{'users': users})
+
 
 
 # For Processing the Csv File uploaded by Manager: 
@@ -51,7 +50,7 @@ def process_uploaded_csv(request):
             
             else:
                 user = User(username=fields[0], email=fields[1],
-                        password=make_password(fields[2]))
+                password=make_password(fields[2]))
                 user.save()
             
             
@@ -95,14 +94,17 @@ def register_single(request):
     return render(request, 'manager/register.html')
 
 
-
-def project_details(request):
+def team_project_details(request):
+    users = User.objects.all()
+    print(users)
     if request.method == 'POST':
-        user = request.user
+        manager = request.user
+        manager_id = manager.id
         proj_name = request.POST.get('proj_name')
         proj_desc = request.POST.get('proj_desc')
         proj_start = request.POST.get('proj_start')
         proj_end= request.POST.get('proj_end') 
+<<<<<<< HEAD
         proj_manager_id = user.id
         proj_lead_id = request.post.get()
 
@@ -111,3 +113,26 @@ from django.shortcuts import render
 
 
 
+=======
+        lead_name = request.POST.get('team-lead-username')
+        user = User.objects.get(username = lead_name)
+        
+        proj_lead_id = user.id
+        project_client = "CHRIST University"
+        # Retrieve the user based on the selected username
+        project_details = Project.objects.create(proj_name =proj_name,
+                                                proj_client = project_client,
+                                                proj_manager_id = manager_id,
+                                                proj_status = "Active", 
+                                                proj_startdate = proj_start,
+                                                proj_enddate = proj_end,
+                                                proj_lead_id = proj_lead_id,
+                                                proj_updated_start_date = models.SET_NULL,
+                                                proj_updated_end_date = models.SET_NULL,proj_desc = proj_desc) 
+        
+        project_details.save()
+        messages.success(request, "Team Created Successfully..")
+        return redirect("manager-create")
+    
+    else:
+        return render(request,"manager/create_team.html",{'users': users})

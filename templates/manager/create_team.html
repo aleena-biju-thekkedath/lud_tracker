@@ -89,7 +89,23 @@
     </tbody>
   </table>
 
-</div>
+  <div class="select mt-5 mb-5">
+    <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+    <select class="select-items" name="team-lead">
+      <option value="*" disabled selected>Please select...</option>
+          {% for user in users %}
+      <option value="{{ user.id }}">{{ user.username }}</option>
+      {% endfor %}
+    <!-- <select class="select-items" name = "team-lead">
+      <option value="*" disabled selected>Please select...</option>
+      <option value="1">M1</option>
+      <option value="2">M2</option>
+      <option value="3">M3</option>
+      <option value="4">M4</option>
+      <option value="5">M5</option> -->
+
+    </select>
+  </div>
 
 
 
@@ -151,36 +167,35 @@
 </div>
 
 
-
-
+<!-- Script for Checkbox based on Number of Members:  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
-  $(document).ready(function () {
-    $('#memberCount').change(function () {
-      var selectedCount = parseInt($(this).val());
-      var $checkboxes = $('#myTable tbody .team-member-checkbox');
+$(document).ready(function() {
+    $('#memberCount').change(function() {
+        var selectedCount = parseInt($(this).val());
+        var $checkboxes = $('#myTable tbody .team-member-checkbox');
 
-      $checkboxes.prop('disabled', false);
-
-      // if (selectedCount > 0) {
-      //     $checkboxes.prop('checked', false);
-      //     $checkboxes.slice(selectedCount).prop('disabled', true);
-      // }
+        if (selectedCount > 0) {
+            $checkboxes.prop('disabled', false);
+            $checkboxes.prop('checked', false);
+        } else {
+            $checkboxes.prop('disabled', true);
+            $checkboxes.prop('checked', false);
+        }
     });
 
-    $('#myTable tbody .team-member-checkbox').change(function () {
-      // var selectedCount = parseInt($('#memberCount').val());
-      var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
-      console.log($checkedCheckboxes.length);
-      console.log($selectedCount)
-      if ($checkedCheckboxes.length >= selectedCount) {
-        console.log($checkedCheckboxes.length);
-        console.log($selectedCount)
-        $('#myTable tbody .team-member-checkbox:not(:checked)').prop('disabled', true);
-      } else {
-        $('#myTable tbody .team-member-checkbox:not(:checked)').prop('disabled', false);
-      }
+    $('#myTable tbody .team-member-checkbox').change(function() {
+        var selectedCount = parseInt($('#memberCount').val());
+        var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
+        var $uncheckedCheckboxes = $('#myTable tbody .team-member-checkbox:not(:checked)');
+
+        if ($checkedCheckboxes.length >= selectedCount) {
+            $uncheckedCheckboxes.prop('disabled', true);
+        } else {
+            $uncheckedCheckboxes.prop('disabled', false);
+        }
     });
-  });
+});
 </script>
+
 {% endblock content %}
