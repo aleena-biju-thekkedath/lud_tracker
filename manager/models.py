@@ -18,18 +18,26 @@ class Project(models.Model):
     proj_updated_start_date = models.DateField()
     proj_updated_end_date = models.DateField()
     proj_desc = models.CharField(max_length = 1000,default= "NA")
+    # proj_id
 
 class Tasks(models.Model):
     date_created = models.DateTimeField()
     date_ended = models.DateTimeField()
     emp_id_assigned_to = models.ForeignKey(UserProfile, on_delete = models.CASCADE, related_name= "member_id")
-    emp_id_assigned_by = models.ForeignKey(UserProfile, on_delete = models.CASCADE, related_name = "manger_id")   
+    emp_id_assigned_by = models.ForeignKey(UserProfile, on_delete = models.CASCADE, related_name = "lead_id") 
+    task_name = models.CharField(max_length= 100)
+    task_desc = models.CharField(max_length = 1000,default= "NA")
+    task_status = models.CharField(max_length = 10)
+    # task_id
+    
 
 class Members(models.Model):
     proj_id = models.ForeignKey(Project, on_delete = models.CASCADE,)
     emp_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE,)
+    # task_id
     status = models.CharField(max_length= 10)
     date_joined = models.DateField()
+
 
 
     
