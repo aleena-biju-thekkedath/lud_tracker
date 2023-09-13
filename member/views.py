@@ -1,10 +1,19 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
+def is_active_member(user):
+    return user.is_active and not user.is_superuser
+
+
+@login_required
+@user_passes_test(is_active_member)
 def home_member(request):
     return render(request,'member/member.html')
 
+@login_required
+@user_passes_test(is_active_member)
 def comments(request):
     return render(request,'comments.html')
 
