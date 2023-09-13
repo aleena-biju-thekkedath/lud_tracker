@@ -40,8 +40,12 @@
           {% csrf_token %}
           <form>
                 <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded align-self-center">
-                <h6 class="text-primary-emphasis fw-bold">Username   <i class="fa-solid fa-bars-progress"></i></h6>
-                <input type="text" class="form-control" placeholder= "Username" aria-label="title"  name = "name" required>
+                <h6 class="text-primary-emphasis fw-bold">Username  <i class="fa-solid fa-bars-progress"></i></h6>
+                <input type="text" class="form-control" placeholder= "Username" aria-label="title"  name = "username" required>
+
+                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded align-self-center">
+                  <h6 class="text-primary-emphasis fw-bold">Name  <i class="fa-solid fa-bars-progress"></i></h6>
+                  <input type="text" class="form-control" placeholder= "Full Name" aria-label="title"  name = "name" required>
 
                 <h6 class="text-primary-emphasis fw-bold mt-5">Role  <i class="fa-solid fa-user"></i></h6>
                 <input type="text" class="form-control" placeholder="Role" aria-label="title" name = "role "required>

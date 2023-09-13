@@ -99,6 +99,27 @@
       {% for user in users %}
       <option value="{{ user.id }}">{{ user.username }}</option>
       {% endfor %}
+    <!-- <select class="select-items" name = "team-lead">
+      <option value="*" disabled selected>Please select...</option>
+      <option value="1">M1</option>
+      <option value="2">M2</option>
+      <option value="3">M3</option>
+      <option value="4">M4</option>
+      <option value="5">M5</option> -->
+
+    </select>
+  </div>
+
+
+
+
+<div class="select mt-5 mb-5">
+  <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+  <select class="select-items">
+    <option value="*" disabled selected>Please select...</option>
+    {% for user in users %}
+      <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
 
     </select>
   </div>
@@ -137,15 +158,15 @@
         </div>
       </div>
 
-    </form>
-  </div>
+  </form>
+</div>
 
 
 
-  <button class="btn btn-lg float-end mx-2 border border-secondary"
-    style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
-  <a href="{% url 'manager-home' %}" class="btn btn-lg float-end btn-secondary border border-secondary"
-    style="color: white; size: 50px;" type="button">Back</a>
+<button class="btn btn-lg float-end mx-2 border border-secondary"
+  style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
+<a href="{% url 'manager-home' %}" class="btn btn-lg float-end btn-secondary border border-secondary"
+  style="color: white; size: 50px;" type="button">Back</a>
 </div>
 
 
