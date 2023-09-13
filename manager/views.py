@@ -125,6 +125,8 @@ def team_project_details(request):
         proj_desc = request.POST.get('proj_desc')
         proj_start = request.POST.get('proj_start')
         proj_end= request.POST.get('proj_end') 
+        proj_manager_id = user.id
+        proj_lead_id = request.post.get()
         lead_name = request.POST.get('team-lead-username')
         user = User.objects.get(username = lead_name)
         
@@ -151,34 +153,34 @@ def team_project_details(request):
     
 @login_required 
 @user_passes_test(is_admin)
-@user_passes_test(lambda user: user == request.user)  
+
 def update_project_dates(request): 
-    project_name = request.POST.get('project_name')
-    project_id = request.POST.get('project_id')
-    existing_start = Project.objects.get(project.proj_startdate,id = project_id)
-    existing_end = Project.objects.get(project.proj_enddate,id = project_id)
-    print(f"Project Dates are /n Start Date: {existing_start} /n End Date: {existing_end} ")
-    updated_start = request.POST.get('updated_start_date')
-    updated_end = request.POST.get('updated_end_date')
+        project_name = request.POST.get('project_name')
+        project_id = request.POST.get('project_id')
+        existing_start = Project.objects.get(project.proj_startdate,id = project_id)
+        existing_end = Project.objects.get(project.proj_enddate,id = project_id)
+        print(f"Project Dates are /n Start Date: {existing_start} /n End Date: {existing_end} ")
+        updated_start = request.POST.get('updated_start_date')
+        updated_end = request.POST.get('updated_end_date')
 
-    try:
-        project = Project.objects.get(id=project_id)
-    except Project.DoesNotExist:
-        # Handle the case where the project does not exist
-        messages.error(request, "Project Not Found ... Please Try Again")
-        return redirect("manager-create")
-    
-    # Check if the name is null and update it to a non-null value
-    if project.id == project_id or project.name == project_name:
-        # Replace with the Updated Dates : 
-        project.proj_updated_start_date = updated_start 
-        project.proj_updated_end_date = updated_end
-        project.save()
+        try:
+            project = Project.objects.get(id=project_id)
+        except Project.DoesNotExist:
+                # Handle the case where the project does not exist
+                messages.error(request, "Project Not Found ... Please Try Again")
+                return redirect("manager-create")
+            
+            # Check if the name is null and update it to a non-null value
+        if project.id == project_id or project.name == project_name:
+                # Replace with the Updated Dates : 
+            project.proj_updated_start_date = updated_start 
+            project.proj_updated_end_date = updated_end
+            project.save()
 
-        messages.success(request, "Project Dates Updated Successfully")
-        return redirect("manager-create")
+            messages.success(request, "Project Dates Updated Successfully")
+            return redirect("manager-create")
 
 
- # Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
-def unauthorized_access(request):
+    # Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
+def unauthorized_access(reverse_lazy):
     return HttpResponseRedirect(reverse_lazy('unauthorized.html')) 
