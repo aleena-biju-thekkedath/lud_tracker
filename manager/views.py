@@ -8,8 +8,8 @@ from lud_tracker import settings
 from .models import UserProfile, Project, Tasks
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+# from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 
 
@@ -20,14 +20,14 @@ def is_admin(user):
 
 # For Manager Home Page: 
  # Ensure the user is logged in
-@login_required 
-@user_passes_test(is_admin)
+# @login_required 
+# @user_passes_test(is_admin)
 def home_manager(request):
     # user = User.objects.create()
     return render(request, 'manager/manager.html')
 
-@login_required 
-@user_passes_test(is_admin)
+# @login_required 
+# @user_passes_test(is_admin)
 def modal(request):
     # user = User.objects.create()
     return render(request, 'manager/project_modal.html')
@@ -37,8 +37,8 @@ def modal(request):
 
 
 # For Processing the Csv File uploaded by Manager: 
-@login_required 
-@user_passes_test(is_admin)
+# @login_required 
+# @user_passes_test(is_admin)
 def process_uploaded_csv(request):
     if request.POST:
         uploaded_file = request.FILES["file"]
@@ -78,8 +78,8 @@ def process_uploaded_csv(request):
 
 
 # For Registering Single User: 
-@login_required 
-@user_passes_test(is_admin)
+# @login_required 
+# @user_passes_test(is_admin)
 def register_single(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -113,8 +113,8 @@ def register_single(request):
             
     return render(request, 'manager/register.html')
 
-@login_required 
-@user_passes_test(is_admin)
+# @login_required 
+# @user_passes_test(is_admin)
 def team_project_details(request):
     users = User.objects.all()
     print(users)
@@ -125,7 +125,6 @@ def team_project_details(request):
         proj_desc = request.POST.get('proj_desc')
         proj_start = request.POST.get('proj_start')
         proj_end= request.POST.get('proj_end') 
-        proj_manager_id = user.id
         proj_lead_id = request.post.get()
         lead_name = request.POST.get('team-lead-username')
         user = User.objects.get(username = lead_name)
@@ -151,9 +150,8 @@ def team_project_details(request):
     else:
         return render(request,"manager/create_team.html",{'users': users})
     
-@login_required 
-@user_passes_test(is_admin)
-
+# @login_required 
+# @user_passes_test(is_admin)
 def update_project_dates(request): 
         project_name = request.POST.get('project_name')
         project_id = request.POST.get('project_id')
@@ -182,5 +180,5 @@ def update_project_dates(request):
 
 
     # Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
-def unauthorized_access(reverse_lazy):
-    return HttpResponseRedirect(reverse_lazy('unauthorized.html')) 
+def unauthorized_access(request):
+    return HttpResponse("<h1> You are not authorized to view this page. Refresh or return to home page !! </h1>") 

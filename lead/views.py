@@ -8,18 +8,19 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 def is_staff(user):
     return user.is_staff 
 
-@login_required 
-@user_passes_test(is_staff)
+# @login_required 
+# @user_passes_test(is_staff)
 def home_lead(request):
     return render(request,'lead/lead.html')
 
-@login_required 
-@user_passes_test(is_staff)
+# @login_required 
+# @user_passes_test(is_staff)
 def try_lead(request):
-    return render(request,'lead/try.html')
+    tasks = Tasks.objects.all() 
+    return render(request,'lead/try.html',{"tasks":tasks})
 
-@login_required 
-@user_passes_test(is_staff)
+# @login_required 
+# @user_passes_test(is_staff)
 def add_task(request): 
     tasks = Tasks.objects.all()
     print(tasks)
@@ -58,8 +59,8 @@ def add_task(request):
         return redirect("lead-home")
     
 
-@login_required 
-@user_passes_test(is_staff)    
+# @login_required 
+# @user_passes_test(is_staff)    
 def update_task_dates(request): 
     tasks = Tasks.objects.all()
     task_name = request.POST.get('project_name')
