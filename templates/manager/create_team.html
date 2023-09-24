@@ -67,7 +67,7 @@
   </div>
 
 
-
+<!-- HTML block to Select Team Members -->
 
   <div class="container-table p-3 rounded mt-3 mb-4 border border-black">
     <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
@@ -99,18 +99,21 @@
       {% for user in users %}
       <option value="{{ user.id }}">{{ user.username }}</option>
       {% endfor %}
-    <!-- <select class="select-items" name = "team-lead">
-      <option value="*" disabled selected>Please select...</option>
-      <option value="1">M1</option>
-      <option value="2">M2</option>
-      <option value="3">M3</option>
-      <option value="4">M4</option>
-      <option value="5">M5</option> -->
 
     </select>
   </div>
 
 
+
+  <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
+    <form method="post">
+      {% csrf_token %}
+      <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
+      <div class="form-group  mt-3">
+        <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
+            class="fa-solid fa-bookmark"></i></label>
+        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2"
+          placeholder="Title" name="proj_name">
 
 
 <div class="select mt-5 mb-5">
@@ -158,15 +161,9 @@
         </div>
       </div>
 
-  </form>
-</div>
 
 
-
-<button class="btn btn-lg float-end mx-2 border border-secondary"
-  style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
-<a href="{% url 'manager-home' %}" class="btn btn-lg float-end btn-secondary border border-secondary"
-  style="color: white; size: 50px;" type="button">Back</a>
+  
 </div>
 
 
