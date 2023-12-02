@@ -14,9 +14,8 @@
         border: 40px;
         border-radius: 12px;
         box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-        
-    }
 
+    }
 </style>
 
 
@@ -30,7 +29,7 @@
                         <div class="p-3">
                             <h3>Task Ready</h3>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <!-- Card content for Task Ready -->
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
@@ -41,12 +40,14 @@
                         </div>
                     </div>
                     <!-- In Progress -->
+
                     <div class="col-3">
                         <div class="p-3">
                             <h3>In progress</h3>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <!-- Card content for In Progress -->
+                            {% for task in tasks %}
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
@@ -54,7 +55,7 @@
                                 <i class="fas fa-flag"></i> 22 Aug
                             </div>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
@@ -68,7 +69,7 @@
                         <div class="p-3">
                             <h3>In Review</h3>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <!-- Card content for In Review -->
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
@@ -77,7 +78,7 @@
                                 <i class="fas fa-flag"></i> 22 Aug
                             </div>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
@@ -85,7 +86,7 @@
                                 <i class="fas fa-flag"></i> 22 Aug
                             </div>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">member name1</h6>
@@ -99,7 +100,7 @@
                         <div class="p-3">
                             <h3>Done</h3>
                         </div>
-                        <div class="card mt-3" >
+                        <div class="card mt-3">
                             <!-- Card content for Done -->
                             <div class="card-body">
                                 <h5 class="card-title">task 1</h5>
@@ -114,15 +115,15 @@
         </div>
 
         <!-- Vertical Line and 'text' -->
-  
-        <div class="col-md-3" >
+
+        <div class="col-md-3">
             <div class="container">
-                <div class="row align-items-center"> 
-                        <div class="col" >
-                            <h5 class="mt-3">Task Progress</h5>
-                            
-                            
-                        </div>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h5 class="mt-3">Task Progress</h5>
+
+
+                    </div>
                 </div>
             </div>
         </div>

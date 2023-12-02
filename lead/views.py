@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from manager.models import Tasks
+from manager.models import Tasks, UserProfile
 from django.contrib.auth.models import User 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
+import re
+# from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 def is_staff(user):
@@ -11,31 +12,23 @@ def is_staff(user):
 # @login_required 
 # @user_passes_test(is_staff)
 def home_lead(request):
-    return render(request,'lead/lead.html')
-
-# @login_required 
-# @user_passes_test(is_staff)
-def try_lead(request):
-    tasks = Tasks.objects.all() 
-    return render(request,'lead/try.html',{"tasks":tasks})
-
-# @login_required 
-# @user_passes_test(is_staff)
-def add_task(request): 
-    tasks = Tasks.objects.all()
-    print(tasks)
+    user_profile = UserProfile.objects.all()
+    users = User.objects.all()
     if request.method == 'POST':
         lead = request.user
         lead_id = lead.id
-        member = request.POST.get('name')
-        task_title = request.POST.get('task_name')
-        task_desc = request.POST.get('task_desc')
-        task_start = request.POST.get('task_start')
-        task_end= request.POST.get('task_end') 
-        user = User.objects.get(first_name = member)
-        member_id = user.id
+        member = request.POST.get('selected_username')
+        task_title = request.POST.get('task_title')
+        task_desc = request.POST.get('task_description')
+        task_start = request.POST.get('start_date')
+        task_end= request.POST.get('end_date') 
+
+        member = re.sub(r'[^0-9]', '', member)
+        member_id = re.sub(r'\s+', '', member)
+        member_id = int(member_id)
+       
         
-        if member == "Select Member": 
+        if member == "Not Assigned": 
         # Retrieve the user based on the selected username
             task_details = Tasks.objects.create(date_created = task_start,
                                                 date_ended = task_end,
@@ -45,19 +38,19 @@ def add_task(request):
                                                 task_description = task_desc,
                                                 task_title = task_title)
         
-        else:  
+        else: 
             task_details = Tasks.objects.create(date_created = task_start,
-                                                date_ended = task_end,
-                                                emp_id_assigned_to = member_id,
-                                                emp_id_assigned_by = lead_id,  
-                                                task_status = "In Progress", 
-                                                task_description = task_desc,
-                                                task_title = task_title)
-            
-        task_details.save()
-        messages.success(request, "Task Assigned Successfully..")
-        return redirect("lead-home")
-    
+                                           date_ended = task_end,
+                                           emp_id_assigned_to = member_id,
+                                           emp_id_assigned_by = lead_id,  
+                                           task_status = "In Progress", 
+                                           task_description = task_desc,
+                                           task_title = task_title)
+
+            task_details.save()
+            messages.success(request, "Task Assigned Successfully..")
+            return redirect("lead-home")
+    return render(request,'lead/lead1.html',{"users": users}, {"user_profiles": user_profile})
 
 # @login_required 
 # @user_passes_test(is_staff)    
@@ -88,3 +81,20 @@ def update_task_dates(request):
         messages.success(request, "Task Dates Updated Successfully")
         return redirect("lead-try")
     
+    
+
+# @login_required 
+# @user_passes_test(is_staff)
+def try_lead(request):
+    tasks = Tasks.objects.all() 
+    users = User.bjects.all()
+    return render(request,'lead/lead1.html',{"tasks":tasks, "users": users })
+
+# @login_required 
+# @user_passes_test(is_staff)
+
+    
+
+
+                  
+            

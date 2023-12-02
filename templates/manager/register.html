@@ -22,7 +22,7 @@
       <h1 class="mx-5 mt-5">File Upload</h1>
       <form method="post" action="{% url 'process_uploaded_csv' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        
+
         <br>
         <label for="file" class="form-label mx-5">Input the file</label>
         <input class="form-control mx-5" type="file" name="file" id="file" multiple />
@@ -38,38 +38,42 @@
 
         <form method="POST" action="" enctype="multipart/form-data">
           {% csrf_token %}
-          <form>
-                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded align-self-center">
-                  <h6 class="text-primary-emphasis fw-bold">Username<i class="fa-solid fa-bars-progress"></i></h6>
-                  <input type="text" class="form-control" placeholder= "Username" aria-label="title"  name = "username" required>
+            <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded align-self-center">
+              <h6 class="text-primary-emphasis fw-bold">Username<i class="fa-solid fa-bars-progress"></i></h6>
+              <input type="text" class="form-control" placeholder="Username" aria-label="title" name="username"
+                required>
 
-                <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded align-self-center">
-                  <h6 class="text-primary-emphasis fw-bold">Name  <i class="fa-solid fa-bars-progress"></i></h6>
-                  <input type="text" class="form-control" placeholder= "Full Name" aria-label="title"  name = "name" required>
+              <h6 class="text-primary-emphasis fw-bold">Name <i class="fa-solid fa-bars-progress"></i></h6>
+              <input type="text" class="form-control" placeholder="Full Name" aria-label="title" name="name" required>
 
-                <h6 class="text-primary-emphasis fw-bold mt-5">Role  <i class="fa-solid fa-user"></i></h6>
-                <input type="text" class="form-control" placeholder="Role" aria-label="title" name = "role "required>
+              <h6 class="text-primary-emphasis fw-bold mt-5">Role <i class="fa-solid fa-user"></i></h6>
+              <input type="text" class="form-control" placeholder="Role" aria-label="title" name="role " required>
 
-                <h6 class="text-primary-emphasis fw-bold mt-5">Email  <i class="fa-regular fa-envelope"></i></h6>
-                <input type="text" class="form-control" placeholder="Email Id" aria-label="title" name = "email" required>
+              <h6 class="text-primary-emphasis fw-bold mt-5">Email <i class="fa-regular fa-envelope"></i></h6>
+              <input type="text" class="form-control" placeholder="Email Id" aria-label="title" name="email" required>
 
-                 <h6 class="text-primary-emphasis fw-bold  mt-5">Password <i class="fa-solid fa-key"></i></h6>
-                <input type="text" class="form-control" placeholder="Password" aria-label="title" name ="password" required>
+              <h6 class="text-primary-emphasis fw-bold  mt-5">Password <i class="fa-solid fa-key"></i></h6>
+              <input type="text" class="form-control" placeholder="Password" aria-label="title" name="password"
+                required>
 
-                <h6 class="text-primary-emphasis fw-bold  mt-5">Confirm Password <i class="fa-solid fa-check-double"></i></h6>
-                <input type="text" class="form-control" placeholder="Confirm the password" aria-label="title" name = "confirm_password" required>
+              <h6 class="text-primary-emphasis fw-bold  mt-5">Confirm Password <i class="fa-solid fa-check-double"></i>
+              </h6>
+              <input type="text" class="form-control" placeholder="Confirm the password" aria-label="title"
+                name="confirm_password" required>
 
-                <button class="mx-1 btn btn-info mt-5" type="submit">Submit Details</button>
+              <button class="mx-1 btn btn-info mt-5" type="submit">Submit Details</button>
+            </div>
           </form>
       </div>
     </div>
     <div class="col-md-12">
       {% if messages %}
       {% for message in messages %}
-      <div class="alert  {% if message.tags == 'success' %} alert-success {% elif message.tags == 'error' %} alert-danger  {% endif %} alert-dismissible fade show"
-      data-notify="container" data-timeout="3000" role="alert">
-          {{message}}
-          <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <div
+        class="alert  {% if message.tags == 'success' %} alert-success {% elif message.tags == 'error' %} alert-danger  {% endif %} alert-dismissible fade show"
+        data-notify="container" data-timeout="3000" role="alert">
+        {{message}}
+        <button type="button" class="btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       {% endfor %}
       {% endif %}

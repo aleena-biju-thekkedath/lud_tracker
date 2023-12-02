@@ -13,12 +13,12 @@ from django.http import HttpResponse
 
 
 
-# Check if the user is a superuser
+# ----------------------------------------Check if the user is a superuser  ---------------------------------------------
 def is_admin(user):
     return user.is_superuser  
 
 
-# For Manager Home Page: 
+ # ------------------------------------------ Manager Home Page View  ---------------------------------------------
  # Ensure the user is logged in
 # @login_required 
 # @user_passes_test(is_admin)
@@ -34,9 +34,8 @@ def modal(request):
 
 # Create Team Page :
 
+# ---------------------------- Processing the Csv File uploaded by Manager: ---------------------------------------------
 
-
-# For Processing the Csv File uploaded by Manager: 
 # @login_required 
 # @user_passes_test(is_admin)
 def process_uploaded_csv(request):
@@ -77,7 +76,7 @@ def process_uploaded_csv(request):
         return render(request, "manager/register.html")
 
 
-# For Registering Single User: 
+    # ---------------------------- -----Registering Single User: Function ---------------------------------------------
 # @login_required 
 # @user_passes_test(is_admin)
 def register_single(request):
@@ -113,6 +112,7 @@ def register_single(request):
             
     return render(request, 'manager/register.html')
 
+# ------------------------------------ Project Details Drop-Box Function ---------------------------------------------
 # @login_required 
 # @user_passes_test(is_admin)
 def team_project_details(request):
@@ -150,6 +150,9 @@ def team_project_details(request):
     else:
         return render(request,"manager/create_team.html",{'users': users})
     
+
+# ----------------------------------------- Project Update Function ---------------------------------------------
+    
 # @login_required 
 # @user_passes_test(is_admin)
 def update_project_dates(request): 
@@ -179,6 +182,9 @@ def update_project_dates(request):
             return redirect("manager-create")
 
 
-    # Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
+
+# ---------------------------- Unauthorized Users View Function  -------------------------------------------------------
+   
+# Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
 def unauthorized_access(request):
     return HttpResponse("<h1> You are not authorized to view this page. Refresh or return to home page !! </h1>") 
