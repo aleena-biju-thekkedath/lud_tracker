@@ -15,9 +15,9 @@ def home_lead(request):
 
 # @login_required 
 # @user_passes_test(is_staff)
-def try_lead(request):
-    tasks = Tasks.objects.all() 
-    return render(request,'lead/try.html',{"tasks":tasks})
+# def try_lead(request):
+#     tasks = Tasks.objects.all() 
+#     return render(request,'lead/try.html',{"tasks":tasks})
 
 # @login_required 
 # @user_passes_test(is_staff)
