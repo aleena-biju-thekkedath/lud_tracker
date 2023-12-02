@@ -4,5 +4,4 @@ from .views import home_lead
 
 urlpatterns = [
     path("",home_lead,name='lead-home'),
-
 ]

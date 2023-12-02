@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
+# UserProfile Model for User Information: 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=100) 
-    # Add any other fields you need for the UserProfile
 
 
 # class Project(models.Model):
@@ -15,11 +16,13 @@ class UserProfile(models.Model):
 #     proj_startdate = models.DateField()
 #     proj_enddate = models.DateField()
 #     proj_lead_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE,related_name = "proj_lead_id")
-#     proj_updated_start_date = models.DateField()
+    # proj_updated_start_date = models.DateField()
 #     proj_updated_end_date = models.DateField()
 #     proj_desc = models.CharField(max_length = 1000,default= "NA")
 #     # proj_id
 
+
+# Task Database for Task Information: 
 class Tasks(models.Model):
     date_created = models.DateTimeField()
     date_ended = models.DateTimeField()
