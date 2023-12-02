@@ -12,8 +12,19 @@ def is_staff(user):
 # @login_required 
 # @user_passes_test(is_staff)
 def home_lead(request):
-    user_profile = UserProfile.objects.all()
-    users = User.objects.all()
+    return render(request,'lead/lead.html')
+
+# @login_required 
+# @user_passes_test(is_staff)
+# def try_lead(request):
+#     tasks = Tasks.objects.all() 
+#     return render(request,'lead/try.html',{"tasks":tasks})
+
+# @login_required 
+# @user_passes_test(is_staff)
+def add_task(request): 
+    tasks = Tasks.objects.all()
+    print(tasks)
     if request.method == 'POST':
         lead = request.user
         lead_id = lead.id

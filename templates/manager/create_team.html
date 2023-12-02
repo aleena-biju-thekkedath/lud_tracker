@@ -69,31 +69,34 @@
 
 <!-- HTML block to Select Team Members -->
 
-<div class="container-table p-3 rounded mt-3 mb-4 border border-black">
-  <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
+  <div class="container-table p-3 rounded mt-3 mb-4 border border-black">
+    <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
 
-  <table id="myTable" class="display p-1 rounded border">
-    <thead>
-      <tr>
-        <th>Member Name</th>
-        <th>Add to Team</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in users %}
-      <tr>
-        <td>{{ user.username }}</td>
-        <td><input type="checkbox" name="select_members" class="team-member-checkbox"></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <table id="myTable" class="display p-1 rounded border">
+      <thead>
+        <tr>
+          <th>Member Name</th>
+          <th>Add to Team</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td><input type="checkbox" name="select_members" class="team-member-checkbox"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
 
   <div class="select mt-5 mb-5">
     <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
-    <select class="select-items" name="team-lead">
+    <select class="select-items">
       <option value="*" disabled selected>Please select...</option>
-          {% for user in users %}
+      {% for user in users %}
       <option value="{{ user.id }}">{{ user.username }}</option>
       {% endfor %}
 
@@ -121,42 +124,27 @@
       <option value="{{ user.id }}">{{ user.username }}</option>
     {% endfor %}
 
-  </select>
-</div>
+    </select>
+  </div>
 
 
 
-<div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
-  <form method="post">
-    <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
-    <div class="form-group  mt-3">
-      <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
-          class="fa-solid fa-bookmark"></i></label>
-      <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2" placeholder="Title"
-        name="proj_name">
+  <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
+    <form method="post">
+      <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
+      <div class="form-group  mt-3">
+        <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
+            class="fa-solid fa-bookmark"></i></label>
+        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2"
+          placeholder="Title" name="proj_name">
 
-    </div>
-    <div class="form-group mt-2">
-      <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i
-          class="fa-solid fa-clipboard"></i></label>
-      <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
-        placeholder="Description" name="proj_desc"></textarea>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-6 form-group mt-2">
-        <label for="exampleFormControlDate1" class="mb-1 fw-bold">Start Date <i
-            class="fa-regular fa-calendar-days"></i></label>
-        <input type="date" class="form-control border border-secondary" placeholder="Start date"
-          id="examleFormControlDate1" name="proj_start">
       </div>
-      <div class="col-md-6 form-group mt-2">
-        <label for="exampleFormControlDate2" class="mb-1 fw-bold">End Date <i
-            class="fa-regular fa-calendar-days"></i></label>
-        <input type="date" class="form-control border border-secondary" placeholder="Start date"
-          id="exampleFormControlDate2" name="proj_end">
+      <div class="form-group mt-2">
+        <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i
+            class="fa-solid fa-clipboard"></i></label>
+        <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
+          placeholder="Description" name="proj_desc"></textarea>
       </div>
-    </div>
 
       <div class="row mb-3">
         <div class="col-md-6 form-group mt-2">
@@ -172,13 +160,6 @@
             id="exampleFormControlDate2" name="proj_end">
         </div>
       </div>
-      <button class="btn btn-lg float-end mx-2 border border-secondary"
-      style="background-color: #22577a; color: white; size: 50px;" type="submit">Submit</button>
-    <!-- <button class="btn btn-lg float-end mb-4 btn-secondary" style="color: white; size: 50px;" type="button"><a href="{% url 'manager-create' %}">Back</a></button> -->
-    <a href="{% url 'manager-home' %}" class="btn btn-lg float-end btn-secondary border border-secondary"
-      style="color: white; size: 50px;" type="button">Back</a>
-    </form>
-  </div>
 
 
 
@@ -186,35 +167,35 @@
 </div>
 
 
-<!-- Script for Checkbox based on Number of Members:  -->
+<!-- Script for Checkbox based on Number of Members: 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-    $('#memberCount').change(function() {
-        var selectedCount = parseInt($(this).val());
-        var $checkboxes = $('#myTable tbody .team-member-checkbox');
+  $(document).ready(function () {
+    $('#memberCount').change(function () {
+      var selectedCount = parseInt($(this).val());
+      var $checkboxes = $('#myTable tbody .team-member-checkbox');
 
-        if (selectedCount > 0) {
-            $checkboxes.prop('disabled', false);
-            $checkboxes.prop('checked', false);
-        } else {
-            $checkboxes.prop('disabled', true);
-            $checkboxes.prop('checked', false);
-        }
+      if (selectedCount > 0) {
+        $checkboxes.prop('disabled', false);
+        $checkboxes.prop('checked', false);
+      } else {
+        $checkboxes.prop('disabled', true);
+        $checkboxes.prop('checked', false);
+      }
     });
 
-    $('#myTable tbody .team-member-checkbox').change(function() {
-        var selectedCount = parseInt($('#memberCount').val());
-        var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
-        var $uncheckedCheckboxes = $('#myTable tbody .team-member-checkbox:not(:checked)');
+    $('#myTable tbody .team-member-checkbox').change(function () {
+      var selectedCount = parseInt($('#memberCount').val());
+      var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
+      var $uncheckedCheckboxes = $('#myTable tbody .team-member-checkbox:not(:checked)');
 
-        if ($checkedCheckboxes.length >= selectedCount) {
-            $uncheckedCheckboxes.prop('disabled', true);
-        } else {
-            $uncheckedCheckboxes.prop('disabled', false);
-        }
+      if ($checkedCheckboxes.length >= selectedCount) {
+        $uncheckedCheckboxes.prop('disabled', true);
+      } else {
+        $uncheckedCheckboxes.prop('disabled', false);
+      }
     });
-});
-</script>
+  });
+</script> -->
 
 {% endblock content %}
