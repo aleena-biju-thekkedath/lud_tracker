@@ -12,7 +12,7 @@ def is_staff(user):
 # @login_required 
 # @user_passes_test(is_staff)
 def home_lead(request):
-    return render(request,'lead/lead.html')
+    return render(request,'lead/lead1.html')
 
 # @login_required 
 # @user_passes_test(is_staff)
