@@ -26,7 +26,7 @@ def modal(request):
     # user = User.objects.create()
     return render(request, 'manager/project_modal.html')
 
-# For Processing the Csv File uploaded by Manager: 
+# ========For Manager Register Page =======================================================================================
 
 def process_uploaded_csv(request):
     if request.POST:
@@ -67,6 +67,7 @@ def process_uploaded_csv(request):
 
 
 # # For Registering Single User: 
+# ------------------------------------
 
 def register_single(request):
     if request.method == 'POST':
@@ -101,8 +102,10 @@ def register_single(request):
             
     return render(request, 'manager/register.html')
 
-# # @login_required 
-# # @user_passes_test(is_admin)
+# ==================================================================================================================
+
+
+
 def team_project_details(request):
     users = User.objects.all()
     print(users)
