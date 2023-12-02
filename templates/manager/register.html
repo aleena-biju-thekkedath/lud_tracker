@@ -27,10 +27,8 @@
       <form method="post" action="{% url 'process_uploaded_csv' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
-
-        <br>
         <label for="file" class="form-label mx-5">Input the file</label>
-        <input class="form-control mx-5" type="file" name="file" id="file" multiple />
+        <input class="form-control mx-5" type="file" name="file" id="file" />
         <br>
         <button class="mx-5 btn btn-info" type="submit">Upload</button>
       </form>
