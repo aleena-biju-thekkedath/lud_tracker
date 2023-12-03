@@ -140,7 +140,8 @@ def team_project_details(request):
     users = User.objects.all()
     user_profile = UserProfile.objects.all()
     current_user = request.user
-    all_Assigned_members = Member_Project_Status.objects.all()
+    # all_Assigned_members = Member_Project_Status.objects.all()
+    # all_Assigned_members.save()
     if request.method == "POST":
         # Assuming you want to get the logged-in user
 
@@ -149,17 +150,11 @@ def team_project_details(request):
         proj_start = request.POST.get("proj_start")
         proj_end = request.POST.get("proj_end")
 
-        # Fix the typo: should be request.POST.get, not request.post.get
         lead_id = request.POST.get("team_lead_username")
-        print(lead_id)
+        print('lead_id :',lead_id)
         lead = User.objects.get(id=lead_id)
-        for mem in all_Assigned_members:
-            if mem.status == 0:
-                lead.is_staff = True
-                lead.save()
 
-                # Create the project object
-                project_details = Project.objects.create(
+        project_details = Project.objects.create(
                     proj_name=proj_name,
                     proj_desc=proj_desc,
                     proj_mgr_id=current_user,
@@ -168,19 +163,51 @@ def team_project_details(request):
                     proj_enddate=proj_end,  
                     proj_lead_id=lead,
                 )
-
                 # Save the project
-                project_details.save()
-                print(project_details.id)
+        project_details.save()
+        print('project_details id:',project_details.id)
 
-                user_list = request.POST.getlist("select_members")
-                print(user_list)
-                for user in user_list:
+        user_list = request.POST.getlist("select_members")
+        print(user_list)
+        for user in user_list:
                     userObj = User.objects.get(id=user)
                     teamMemberObj = Member_Project_Status.objects.create(
                         project_id=project_details, emp_id=userObj, status=1
                     )
+        teamMemberObj.save()
 
+        all_Assigned_members = Member_Project_Status.objects.all()
+
+        # Fix the typo: should be request.POST.get, not request.post.get
+
+        for mem in all_Assigned_members:
+            if mem.status == 0:
+                lead.is_staff = True
+                lead.save()
+
+                # Create the project object
+                # project_details = Project.objects.create(
+                #     proj_name=proj_name,
+                #     proj_desc=proj_desc,
+                #     proj_mgr_id=current_user,
+                #     proj_status=True,  # Assuming you want to set the status to "Active"
+                #     proj_startdate=proj_start,
+                #     proj_enddate=proj_end,  
+                #     proj_lead_id=lead,
+                # )
+
+                # # Save the project
+                # project_details.save()
+                # print('project_details id:',project_details.id)
+
+                # user_list = request.POST.getlist("select_members")
+                # print(user_list)
+                # for user in user_list:
+                #     userObj = User.objects.get(id=user)
+                #     teamMemberObj = Member_Project_Status.objects.create(
+                #         project_id=project_details, emp_id=userObj, status=1
+                #     )
+                # teamMemberObj.save()
                 messages.success(request, "Project Assigned Successfully")
                 return redirect("manager-home")
             else:
