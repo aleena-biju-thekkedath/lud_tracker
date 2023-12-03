@@ -62,22 +62,17 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
-                        <form method="POST">
+                        <form method="POST" action="{% url 'add_task' %}">
                             {% csrf_token %}  
                             <div class="modal-body">
                                 <label for="exampleFormControlInput2">Username</label>
                                 <select class="form-select mt-2" aria-label="Default select example"
                                     name="selected_username">
-                                    <option value="*" disabled selected>Select Member..</option>
-                                    <a href="#">
-                                        <option value="*">Not Assigned</option>
-                                    </a>
-
-                                    <a href="#">
-                                        {% for user in users %}
-                                        <option value="{{ user.id }}">{{ user.username }}  - {{user.id}}</option>
-                                        {% endfor %}
-                                    </a>
+                                    
+                                    <option value="" disabled selected>Select Member..</option>
+                                    {% for member in members_list %}
+                                        <option value="{{ member.id }}">{{ member.emp_id.first_name }}</option>
+                                    {% endfor %}
 
                                 </select>
 
@@ -113,7 +108,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary" data-bs-dismiss="#exampleModalToggle2"
+                                    <button type="submit" class="btn btn-primary" data-bs-dismiss="#exampleModalToggle2"
                                         data-bs-toggle="modal">Submit</button>
                                 </div>
                             </div>
@@ -150,7 +145,7 @@
                             <div class="card mt-3">
                                 <!-- Card content for Task Ready -->
                                 {% for task in tasks%}
-                                {%if task.task_status == "Active"%}
+                                {%if task.task_status == 1 %}
                                 <div class="card-body">
                                     <h5 class="card-title">task.task_title</h5>
                                     {% if task.emp_id_assigned_to == user.id %}

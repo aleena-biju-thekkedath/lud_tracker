@@ -66,55 +66,58 @@
   </div>
 
   <!-- HTML block to Select Team Members -->
+  <form method="post">
+    {% csrf_token %}
+    <div class="container-table p-1 rounded mt-3 mb-4 border border-black">
+      <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
 
-  <div class="container-table p-1 rounded mt-3 mb-4 border border-black">
-    <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
+      <table id="myTable" class="display p-3 rounded border">
+        <thead>
+          <tr>
+            <th> Username </th>
+            <th> First Name </th>
+            <th> Add to Team </th>
 
-    <table id="myTable" class="display p-3 rounded border">
-      <thead>
-        <tr>
-          <th> Username </th>
-          <th> First Name </th>
-          <th> Add to Team </th>
-
-        </tr>
-      </thead>
-      <tbody>
-        {% for user in users %}
-        {% if user.is_superuser == 0 %}
-        <tr>
-          <td>{{ user.username }}</td>
-          <td>{{ user.first_name }}</td>
-          <td><input type="checkbox" name="select_members" class="team-member-checkbox"></td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-      </tbody>
-    </table>
-
-  </div>
-
-
-  <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
-
-    <div class="select mt-5 mb-5">
-      <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
-        <select class="select-items" name="team_lead_username">
-          <option value="*" disabled selected>Please select...</option>
+          </tr>
+        </thead>
+        <tbody>
           {% for user in users %}
-            <option value="{{ user.id }}">{{ user.username }}</option>
+          {% if user.is_superuser == 0 %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td><input type="checkbox" name="select_members" value="{{user.id}}" class="team-member-checkbox"></td>
+          </tr>
+          {% endif %}
           {% endfor %}
-        </select>
+        </tbody>
+      </table>
+
     </div>
 
 
-    <form method="post">
-      {% csrf_token %}
+    <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
+
+      <div class="select mt-5 mb-5">
+        <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+        <select class="select-items" name="team_lead_username">
+          <option value="*" disabled selected>Please select...</option>
+          {% for user in users %}
+          {% if user.is_superuser == 0 %}
+          <option value="{{ user.id }}">{{ user.username }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+
+
+
       <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
       <div class="form-group  mt-3">
         <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
             class="fa-solid fa-bookmark"></i></label>
-        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2"
+        <input type="text" class="form-control border border-secondary" id="exampleFormControlInput2"
           placeholder="Title" name="proj_name">
 
       </div>
@@ -140,67 +143,66 @@
             id="exampleFormControlDate2" name="proj_end">
         </div>
 
-
         <button type="submit" class="btn btn-primary mt-2">Submit</button>
-    </form>
-  </div>
+
+      </div>
 
 
 
 
-</div>
+    </div>
+  </form>
+  <style>
+    #myTable {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-<style>
-  #myTable {
-    border-collapse: collapse;
-    width: 100%;
-  }
+    #myTable th,
+    #myTable td {
+      border: 1px solid #ddd;
+      /* Add gridlines */
+      padding: 8px;
+      /* Adjust padding for spacing */
+      text-align: left;
+    }
 
-  #myTable th,
-  #myTable td {
-    border: 1px solid #ddd;
-    /* Add gridlines */
-    padding: 8px;
-    /* Adjust padding for spacing */
-    text-align: left;
-  }
-
-  #myTable th {
-    background-color: #f2f2f2;
-    /* Add a background color to header cells if needed */
-  }
-</style>
+    #myTable th {
+      background-color: #f2f2f2;
+      /* Add a background color to header cells if needed */
+    }
+  </style>
 
 
-<!-- Script for Checkbox based on Number of Members:  -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('#memberCount').change(function () {
-      var selectedCount = parseInt($(this).val());
-      var $checkboxes = $('#myTable tbody .team-member-checkbox');
+  <!-- Script for Checkbox based on Number of Members:  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#memberCount').change(function () {
+        var selectedCount = parseInt($(this).val());
+        var $checkboxes = $('#myTable tbody .team-member-checkbox');
 
-      if (selectedCount > 0) {
-        $checkboxes.prop('disabled', false);
-        $checkboxes.prop('checked', false);
-      } else {
-        $checkboxes.prop('disabled', true);
-        $checkboxes.prop('checked', false);
-      }
+        if (selectedCount > 0) {
+          $checkboxes.prop('disabled', false);
+          $checkboxes.prop('checked', false);
+        } else {
+          $checkboxes.prop('disabled', true);
+          $checkboxes.prop('checked', false);
+        }
+      });
+
+      $('#myTable tbody .team-member-checkbox').change(function () {
+        var selectedCount = parseInt($('#memberCount').val());
+        var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
+        var $uncheckedCheckboxes = $('#myTable tbody .team-member-checkbox:not(:checked)');
+
+        if ($checkedCheckboxes.length >= selectedCount) {
+          $uncheckedCheckboxes.prop('disabled', true);
+        } else {
+          $uncheckedCheckboxes.prop('disabled', false);
+        }
+      });
     });
+  </script>
 
-    $('#myTable tbody .team-member-checkbox').change(function () {
-      var selectedCount = parseInt($('#memberCount').val());
-      var $checkedCheckboxes = $('#myTable tbody .team-member-checkbox:checked');
-      var $uncheckedCheckboxes = $('#myTable tbody .team-member-checkbox:not(:checked)');
-
-      if ($checkedCheckboxes.length >= selectedCount) {
-        $uncheckedCheckboxes.prop('disabled', true);
-      } else {
-        $uncheckedCheckboxes.prop('disabled', false);
-      }
-    });
-  });
-</script>
-
-{% endblock content %}
+  {% endblock content %}

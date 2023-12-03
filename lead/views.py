@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from manager.models import Tasks, UserProfile
+from manager.models import Tasks, UserProfile,Project,Member_Project_Status
 from django.contrib.auth.models import User 
 from django.contrib import messages
 import re
@@ -12,7 +12,10 @@ def is_staff(user):
 # @login_required 
 # @user_passes_test(is_staff)
 def home_lead(request):
-    return render(request,'lead/lead1.html')
+    lead=request.user
+    projectObj=Project.objects.get(proj_lead_id=lead)
+    members_list=Member_Project_Status.objects.filter(project_id=projectObj)
+    return render(request,'lead/lead1.html',{"members_list": members_list})
 
 # @login_required 
 # @user_passes_test(is_staff)
@@ -24,44 +27,48 @@ def home_lead(request):
 # @user_passes_test(is_staff)
 def add_task(request): 
     tasks = Tasks.objects.all()
+    lead=request.user
+    projectObj=Project.objects.get(proj_lead_id=lead)
+    members_list=Member_Project_Status.objects.filter(project_id=projectObj,status=1)
+    print(members_list)
     print(tasks)
     if request.method == 'POST':
-        lead = request.user
-        lead_id = lead.id
+        # lead = request.user
+        lead_id = lead
         member = request.POST.get('selected_username')
+        memberObj=Member_Project_Status.objects.get(id=member)
+
         task_title = request.POST.get('task_title')
         task_desc = request.POST.get('task_description')
         task_start = request.POST.get('start_date')
         task_end= request.POST.get('end_date') 
 
-        member = re.sub(r'[^0-9]', '', member)
-        member_id = re.sub(r'\s+', '', member)
-        member_id = int(member_id)
+        # member = re.sub(r'[^0-9]', '', member)
+        # member_id = re.sub(r'\s+', '', member)
+        # member_id = int(member_id)
        
         
-        if member == "Not Assigned": 
-        # Retrieve the user based on the selected username
-            task_details = Tasks.objects.create(date_created = task_start,
-                                                date_ended = task_end,
-                                                emp_id_assigned_to = "NA",
-                                                emp_id_assigned_by = lead_id,  
-                                                task_status = "Active", 
-                                                task_description = task_desc,
-                                                task_title = task_title)
+        # if member == "Not Assigned": 
+        # # Retrieve the user based on the selected username
+        #     task_details = Tasks.objects.create(date_created = task_start,
+        #                                         date_ended = task_end,
+        #                                         emp_id_assigned_to = member,  
+        #                                         task_status = 1, 
+        #                                         task_description = task_desc,
+        #                                         task_title = task_title)
         
-        else: 
-            task_details = Tasks.objects.create(date_created = task_start,
+         
+        task_details = Tasks.objects.create(date_created = task_start,
                                            date_ended = task_end,
-                                           emp_id_assigned_to = member_id,
-                                           emp_id_assigned_by = lead_id,  
-                                           task_status = "In Progress", 
+                                           emp_id_assigned_to = memberObj,  
+                                           task_status = 1, 
                                            task_description = task_desc,
                                            task_title = task_title)
 
-            task_details.save()
-            messages.success(request, "Task Assigned Successfully..")
-            return redirect("lead-home")
-    return render(request,'lead/lead1.html',{"users": users}, {"user_profiles": user_profile})
+        task_details.save()
+        messages.success(request, "Task Assigned Successfully..")
+        return redirect("lead-home")
+    return render(request,'lead/lead1.html', {"members_list": members_list})
 
 # @login_required 
 # @user_passes_test(is_staff)    
