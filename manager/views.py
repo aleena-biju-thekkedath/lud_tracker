@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import make_password
 from lud_tracker import settings
-from .models import UserProfile
+from .models import UserProfile, Project
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 # from django.urls import reverse_lazy
@@ -11,146 +11,154 @@ from django.http import HttpResponse
 
 
 
-# Check if the user is a superuser
+# ----------------------------------------Check if the user is a superuser  ---------------------------------------------
 def is_admin(user):
     return user.is_superuser  
 
 
-# For Manager Home Page: 
+ # ------------------------------------------ Manager Home Page View  ---------------------------------------------
  # Ensure the user is logged in
-# @login_required 
-# @user_passes_test(is_admin)
 def home_manager(request):
     # user = User.objects.create()
     return render(request, 'manager/manager.html')
 
-# @login_required 
-# @user_passes_test(is_admin)
 def modal(request):
     # user = User.objects.create()
     return render(request, 'manager/project_modal.html')
 
-# Create Team Page :
-def create_team(request):
-    users = User.objects.all()
-    print(users)
-    return render(request,"manager/create_team.html",{'users': users})
+# ========For Manager Register Page =======================================================================================
+# Status : Completed 
 
-
-# For Processing the Csv File uploaded by Manager: 
-# @login_required 
-# @user_passes_test(is_admin)
 def process_uploaded_csv(request):
-    # if request.POST:
-    #     uploaded_file = request.FILES["file"]
-    #     filepath = "files/" + uploaded_file.name
-    #     fs = FileSystemStorage()
-    #     print(filepath)
-    #     fs.save(filepath, uploaded_file)
-    #     is_first_row = True  # Flag to track the first row
-    #     # count = 0
-    #     print(settings.MEDIA_ROOT)
-    #     file_data = open(settings.MEDIA_ROOT + '/' + filepath, 'r')
-    #     for line in file_data.readlines():
-    #         if is_first_row:
-    #             is_first_row = False
-    #             continue  # Skip the first row
+    if request.POST:
+        uploaded_file = request.FILES["file"]
+        filepath = "files/" + uploaded_file.name
+        fs = FileSystemStorage()
+        print(filepath)
+        fs.save(filepath, uploaded_file)
+        is_first_row = True  # Flag to track the first row
+        # count = 0
+        print(settings.MEDIA_ROOT)
+        file_data = open(settings.MEDIA_ROOT + '/' + filepath, 'r')
+        for line in file_data.readlines():
+            if is_first_row:
+                is_first_row = False
+                continue  # Skip the first row
 
-    #         fields = line.split(",")
-    #         # print(fields[0])
+            fields = line.split(",")
+            # print(fields[0])
 
-    #         if fields[3].strip().lower() == "manager":
-    #             user = User(username=fields[0], email=fields[1],
-    #                     password=make_password(fields[2]),is_superuser =True)
-    #             user.save()
+            if fields[3].strip().lower() == "manager":
+                user = User(username=fields[1], email=fields[2],
+                        password=make_password(fields[3]),first_name = fields[4], is_superuser =True)
+                user.save()
+            else:
+                user = User(username=fields[1], email=fields[2],
+                        password=make_password(fields[3]), first_name = fields[4])
+                user.save()
             
-    #         else:
-    #             user = User(username=fields[0], email=fields[1],
-    #                     password=make_password(fields[2]))
-    #             user.save()
-            
-            
-    #         userObj= UserProfile.objects.create(user=user,role=fields[3])
-    #         userObj.save()
+            userObj= UserProfile.objects.create(user=user,role=fields[5])
+            userObj.save()
 
-    #     return redirect('manager-home')
-    # else:
-    return render(request, "manager/register.html")
+        return redirect('manager-home')
+    else:
+        return render(request, "manager/register.html")
 
 
 # # For Registering Single User: 
-# # @login_required 
-# # @user_passes_test(is_admin)
+# ------------------------------------
+
 def register_single(request):
-    # if request.method == 'POST':
-    #     username = request.POST.get('username')
-    #     name = request.POST.get('name')
-    #     email = request.POST.get('email')
-    #     password = request.POST.get('password')
-    #     confirm_password = request.POST.get('confirm_password')  
-    #     role = request.POST.get('role')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        first_name = request.POST.get('name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')  
+        role = request.POST.get('role')
         
-    #     # Password Cross Checking Step: 
-    #     if password != confirm_password:
-    #         messages.error(request, "Passwords do not match")
-    #         return redirect('register')  # Redirect back to the form page
+        # Password Cross Checking Step: 
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match")
+            return redirect('register')  # Redirect back to the form page
         
-    #     # Role Checking Code for assigning user permissions: 
-    #     if role.lower() == "manager":
-    #         user = User.objects.create(username=username,email =email,password = make_password(password),is_superuser= True,first_name = name)
-    #         user.save()
-    #         userProfile = UserProfile.objects.create(role=role,user=user)
-    #         userProfile.save()
-    #         messages.success(request, "Profile Uploaded Successfully ")
-    #         return redirect('register') 
+        # Role Checking Code for assigning user permissions: 
+        if role.lower() == "manager":
+            user = User.objects.create(username=username,email =email,password = make_password(password),is_superuser= True,first_name = first_name)
+            user.save()
+            userProfile = UserProfile.objects.create(role=role,user=user)
+            userProfile.save()
+            messages.success(request, "Profile Uploaded Successfully ")
+            return redirect('register') 
             
-    #     elif role.lower()== "member":
-    #         user = User.objects.create(username = name,email =email,password = password)
-    #         userProfile = UserProfile.objects.create(role=role,user=user)
-    #         user.save()
-    #         userProfile.save()
-    #         messages.success(request, "Profile Uploaded Successfully ")
-    #         return redirect('register')
+        elif role.lower()== "member":
+            user = User.objects.create(username = username,email =email,password = password,first_name = first_name)
+            userProfile = UserProfile.objects.create(role=role,user=user)
+            user.save()
+            userProfile.save()
+            messages.success(request, "Profile Uploaded Successfully ")
+            return redirect('register')
             
     return render(request, 'manager/register.html')
 
-# # @login_required 
-# # @user_passes_test(is_admin)
+# ==================================================================================================================
+
+
+# # ===================================== Project Details for The Manager ===========================================
+# Status: 
+
 def team_project_details(request):
     users = User.objects.all()
-    print(users)
+
     if request.method == 'POST':
+        # Assuming you want to get the logged-in user
         user = request.user
+
         proj_name = request.POST.get('proj_name')
         proj_desc = request.POST.get('proj_desc')
         proj_start = request.POST.get('proj_start')
-        proj_end= request.POST.get('proj_end') 
-        proj_lead_id = request.post.get()
+        proj_end = request.POST.get('proj_end')
+
+        # Fix the typo: should be request.POST.get, not request.post.get
         lead_name = request.POST.get('team-lead-username')
-        user = User.objects.get(username = lead_name)
-        
+
+        # Ensure that a user with the given username exists
+        try:
+            user = User.objects.get(username=lead_name)
+        except User.DoesNotExist:
+            messages.error(request, "User with the provided username does not exist.")
+            return redirect("manager-create")
+
         proj_lead_id = user.id
+        manager_id = request.POST.get('manager-id')
         project_client = "CHRIST University"
-        # Retrieve the user based on the selected username
-        project_details = Project.objects.create(proj_name =proj_name,
-                                                 proj_desc = proj_desc,
-                                                proj_client = project_client,
-                                                proj_manager_id = manager_id,
-                                                proj_status = "Active", 
-                                                proj_startdate = proj_start,
-                                                proj_enddate = proj_end,
-                                                proj_lead_id = proj_lead_id) 
-        
+
+        # Create the project object
+        project_details = Project.objects.create(
+            proj_name=proj_name,
+            proj_desc=proj_desc,
+            proj_client=project_client,
+            proj_manager_id=manager_id,
+            proj_status="Active",  # Assuming you want to set the status to "Active"
+            proj_startdate=proj_start,
+            proj_enddate=proj_end,
+            proj_lead_id=proj_lead_id
+        )
+
+        # Save the project
         project_details.save()
+
         messages.success(request, "Task Assigned Successfully..")
         return redirect("manager-create")
-    
+
     else:
-        return render(request,"manager/create_team.html")
-# ,{'users': users}
+        return render(request, "manager/create_team.html", {"users": users})
+
+
     
-# # @login_required 
-# # @user_passes_test(is_admin)
+# ==================================================================================================================
+
+
 # def update_project_dates(request): 
 #         project_name = request.POST.get('project_name')
 #         project_id = request.POST.get('project_id')

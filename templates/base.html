@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
+
   <link
     href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.css"
     rel="stylesheet" />
@@ -21,24 +21,24 @@
     .my-element {
       display: inline-block;
       margin: 0 0.5rem;
-  
+
       animation: bounce;
       animation-duration: 10s;
     }
-  
+
     @import url(https://fonts.googleapis.com/css?family=Raleway);
-  
+
     body {
       background-color: #fafafa;
       min-height: 100%;
-  
+
       color: #000000;
       background-image: url("http://isaacsuttell.com/img/justine.jpg");
       background-size: cover;
       background-position: center;
-  
+
     }
-  
+
     #title {
       position: fixed;
       top: 10px;
@@ -48,38 +48,38 @@
       z-index: 100;
       color: #000000;
     }
-  
+
     .navbar {
       min-height: 110px;
       background-color: #22577a;
-  
+
     }
-  
+
     .colbor_pad {
       border: 2px solid rgb(16, 50, 70);
       /* Add desired border properties */
       padding: 10px;
       /* Add padding for better appearance */
     }
-  
+
     .custom-input::placeholder {
       color: white;
       /* Use your desired color code */
     }
-  
+
     .inputbar {
       background-color: #8ec4e9
     }
-  
+
     .breadcrumb {
       width: fit-content;
       text-align: center;
-  
+
     }
-  
+
     a {
       text-decoration: none;
-  
+
     }
   </style>
   {% block extrahead %}{% endblock extrahead %}
@@ -100,15 +100,15 @@
   {% block content %}
   {% endblock content %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
   <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
   <script src="https://code.highcharts.com/gantt/modules/accessibility.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-  
-<script
-  src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+  <script
+    src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/fh-3.3.2/r-2.4.1/sb-1.4.2/sp-2.1.2/datatables.min.js"></script>
 
 
   
@@ -128,13 +128,10 @@
           previous: '<i class="fas fa-chevron-left"></i>',
           next: '<i class="fas fa-chevron-right"></i>'
         }
-      }
+      });
+
     });
-
-  });
-</script>
+  </script>
 </body>
-
-
 
 </html>
