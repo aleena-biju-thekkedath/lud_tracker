@@ -135,16 +135,16 @@ def register_single(request):
 # # ===================================== Project Details for The Manager ===========================================
 # Status:
 
-
 def team_project_details(request):
     users = User.objects.all()
     user_profile = UserProfile.objects.all()
+
+     # Assuming you want to get the logged-in user
     current_user = request.user
     # all_Assigned_members = Member_Project_Status.objects.all()
     # all_Assigned_members.save()
     if request.method == "POST":
-        # Assuming you want to get the logged-in user
-
+ 
         proj_name = request.POST.get("proj_name")
         proj_desc = request.POST.get("proj_desc")
         proj_start = request.POST.get("proj_start")
