@@ -84,7 +84,7 @@ def register_single(request):
         
         # Role Checking Code for assigning user permissions: 
         if role.lower() == "manager":
-            user = User.objects.create(username=username,email =email,password = make_password(password),is_superuser= True,first_name = first_name)
+            user = User.objects.create(username=username,email =email,password = make_password(password),is_superuser= True,is_staff = True, first_name = first_name)
             user.save()
             userProfile = UserProfile.objects.create(role=role,user=user)
             userProfile.save()
@@ -109,6 +109,7 @@ def register_single(request):
 
 def team_project_details(request):
     users = User.objects.all()
+    user_profile = UserProfile.objects.all()
 
     if request.method == 'POST':
         # Assuming you want to get the logged-in user
@@ -124,13 +125,13 @@ def team_project_details(request):
 
         # Ensure that a user with the given username exists
         try:
-            user = User.objects.get(username=lead_name)
+            lead = User.objects.get(username=lead_name)
         except User.DoesNotExist:
             messages.error(request, "User with the provided username does not exist.")
             return redirect("manager-create")
 
-        proj_lead_id = user.id
-        manager_id = request.POST.get('manager-id')
+        proj_lead_id = lead.id 
+        manager_id = user.id
         project_client = "CHRIST University"
 
         # Create the project object
@@ -148,44 +149,48 @@ def team_project_details(request):
         # Save the project
         project_details.save()
 
-        messages.success(request, "Task Assigned Successfully..")
-        return redirect("manager-create")
+        messages.success(request, "Project Assigned Successfully..")
+        return redirect("manager-home")
 
     else:
-        return render(request, "manager/create_team.html", {"users": users})
+        current_user = request.user
+        return render(request, "manager/create_team.html",
+                      {"users": users, "user_profile": user_profile,"manager": current_user.username})
 
 
-    
+
+from django.shortcuts import render, redirect
+from .models import Member_Project_Status
+from django.contrib import messages
+
+def confirm_completion(request, project_id):
+    if request.method == 'POST':
+        # Assuming you have a form with a button that submits to this view
+        proj_title = request.POST.get(name = "project-title")
+
+        project = Project.objects.get(proj_title = proj_title)
+        project_id = project.id
+
+        try: 
+            # Get all Member_Project_Status objects with the given project_id
+            members_statuses = Member_Project_Status.objects.filter(project_id=project_id)
+
+            # Update the status to "completed" for all objects
+            members_statuses.update(status="completed")
+
+            messages.success(request, "Confirmation of completion successful.")
+            return redirect("manager-home")
+
+        except Member_Project_Status.DoesNotExist:
+            messages.error(request, "Member_Project_Status does not exist.")
+            return redirect("manager-home")
+
+    else:
+        messages.error(request, "Invalid request method.")
+        return redirect("manager-home")
+
+
 # ==================================================================================================================
 
 
-# def update_project_dates(request): 
-#         project_name = request.POST.get('project_name')
-#         project_id = request.POST.get('project_id')
-#         existing_start = Project.objects.get(project.proj_startdate,id = project_id)
-#         existing_end = Project.objects.get(project.proj_enddate,id = project_id)
-#         print(f"Project Dates are /n Start Date: {existing_start} /n End Date: {existing_end} ")
-#         updated_start = request.POST.get('updated_start_date')
-#         updated_end = request.POST.get('updated_end_date')
-
-#         try:
-#             project = Project.objects.get(id=project_id)
-#         except Project.DoesNotExist:
-#                 # Handle the case where the project does not exist
-#                 messages.error(request, "Project Not Found ... Please Try Again")
-#                 return redirect("manager-create")
-            
-#             # Check if the name is null and update it to a non-null value
-#         if project.id == project_id or project.name == project_name:
-#                 # Replace with the Updated Dates : 
-#             project.proj_updated_start_date = updated_start 
-#             project.proj_updated_end_date = updated_end
-#             project.save()
-
-#             messages.success(request, "Project Dates Updated Successfully")
-#             return redirect("manager-create")
-
-
-#     # Replace 'other_page_name' with the name of the page you want to redirect unauthorized users to.
-# def unauthorized_access(request):
-#     return HttpResponse("<h1> You are not authorized to view this page. Refresh or return to home page !! </h1>") 
+ 

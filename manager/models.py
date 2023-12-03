@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     role = models.CharField(max_length=100) 
 
 
-class Project(models.Model):
+class Project(models.Model):    
     proj_name = models.CharField(max_length= 100)
     proj_client = models.CharField(max_length = 100)
     proj_mgr_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE, related_name = "proj_man_id")
@@ -19,7 +19,6 @@ class Project(models.Model):
     proj_updated_start_date = models.DateField()
     proj_updated_end_date = models.DateField()
     proj_desc = models.CharField(max_length = 1000,default= "NA")
-    # proj_id
 
 
 # Task Database for Task Information: 
@@ -34,9 +33,9 @@ class Tasks(models.Model):
     updated_startdate = models.DateField(default = None)                               
     updated_enddate = models.DateField(default = None)                               
 
-# class Members(models.Model):
-#     proj_id = models.ForeignKey(Project, on_delete = models.CASCADE,)
-#     emp_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE,)
-#     # task_id
-#     status = models.CharField(max_length= 10)
-#     date_joined = models.DateField()
+class Member_Project_Status(models.Model):
+    project_id = models.ForeignKey(Project, on_delete = models.CASCADE,)
+    emp_id = models.ForeignKey(UserProfile, on_delete = models.CASCADE,)
+    status = models.CharField(max_length= 10)
+    date_joined = models.DateField()
+
