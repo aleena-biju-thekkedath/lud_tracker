@@ -7,18 +7,26 @@
 {% block content %}
 
 <style>
-    @import url("https://code.highcharts.com/css/highcharts.css");
+    
+    body {
+	background: linear-gradient(-45deg, #88adc6, #83bcbd, #699686, #beebc1);
+	background-size: 400% 400%;
+	animation: gradient 4s ease infinite;
+	height: 100vh;
+}
 
-    #container {
-        max-width: 500px;
-        margin: 1em auto;
-        -ms-flex-align: end;
-    }
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 
-    .highcharts-treegrid-node-level-1 {
-        font-size: 13px;
-        font-weight: bold;
-    }
 </style>
 
 <body>

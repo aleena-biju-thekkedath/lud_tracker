@@ -9,17 +9,27 @@
 
 {% block content %}
 <style>
-  .form-control {
-    width: 50%;
-  }
+body {
+	background: linear-gradient(-45deg, #ecfee8, #c2efeb, #a7c4a0, #7392b7);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+}
 
-  input{
-    width: 100%;
-  }
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+
+}
+
 </style>
-
-
-
 <div class="container-fluid p-3 bg-transparent">
   <div class="row">
     <div class="col-md-4 border-end">
@@ -94,7 +104,4 @@
     </div>
   </div>
 </div>
-
-
-
 {% endblock content %}

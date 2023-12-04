@@ -10,6 +10,24 @@
 {% block content %}
 
 <style>
+  body {
+	background: linear-gradient(-45deg, #ecfee8, #c2efeb, #d5e7d1, #b4ceee);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
   .container-project {
     background: none;
 
@@ -42,7 +60,7 @@
 <div class="container mt-5" style="width: 1500px;">
 
   <!-- Heading Content Here -->
-  <h1 class="mb-2 text-center">Team Creation</h1>
+  <h1 class="mb-2 text-center">Team Creation</h1> 
 
 
   <!-- Contents for the Dropdown Box for number of Members -->
