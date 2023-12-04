@@ -35,13 +35,14 @@
                 <h1 class="mx-5 mb-5 mt-3 text-primary-emphasis">Welcome, Team Member! <i
                         class="fa-solid fa-handshake"></i></h1>
                 <div class="container mx-5">
-                    <form>
-                        
+                    <form method = "POST", action = "{% url 'task-details' %}">
+
                         <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
                             <h6 class="text-primary-emphasis fw-bold">Title <i class="fa-solid fa-bars-progress"></i>
                             </h6>
+                            <p> {{task_title}}</p>
                             <input type="text" class="form-control" placeholder="Title of the task" aria-label="title"
-                                readonly>
+                                readonly value="{{task_title}}">
                         </div>
 
 
