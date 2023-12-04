@@ -216,7 +216,7 @@ def confirm_completion(request, project_id):
             # Get all Member_Project_Status objects with the given project_id
             members_statuses = Member_Project_Status.objects.filter(
                 project_id=project_id
-            )
+            ) 
 
             # Update the status to "completed" for all objects
             members_statuses.update(status="completed")

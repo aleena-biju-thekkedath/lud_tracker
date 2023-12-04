@@ -7,7 +7,6 @@ from django.contrib import messages
 def is_active_member(user):
     return user.is_active and not user.is_superuser
 
-
 # @login_required
 # @user_passes_test(is_active_member)
 def home_member(request):
