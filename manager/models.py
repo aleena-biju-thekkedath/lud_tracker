@@ -31,7 +31,7 @@ class Tasks(models.Model):
     date_created = models.DateTimeField()
     date_ended = models.DateTimeField()
     emp_id_assigned_to = models.ForeignKey(Member_Project_Status, on_delete = models.CASCADE,)
-    task_status = models.BooleanField(default=0) 
+    task_status = models.IntegerField(default=0) 
     task_description = models.CharField(max_length = 1000, default = "NA")
     task_title = models.CharField(max_length = 100, default = "NA")
     # updated_startdate = models.DateField(default = None)                               
