@@ -64,60 +64,63 @@
   <h1 class="mb-2 text-center">Team Creation</h1> 
 
 
-<!-- HTML block to Select Team Members -->
+  <!-- Contents for the Dropdown Box for number of Members -->
+  <div class="select mt-5 mb-5">
+    <h5 class="mt-1 mx-2">Number of members <i class="fa-solid fa-caret-right pt-1" required></i></h5>
+    <select class="select-items" id="memberCount" name="member_count">
+      <option value="*" disabled selected>Please select...</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
 
-  <div class="container-table p-3 rounded mt-3 mb-4 border border-black">
+    </select>
+
+  </div>
+
+
+  <!-- HTML block to Select Team Members -->
+
+  <div class="container-table p-1 rounded mt-3 mb-4 border border-black">
     <h4 class="mt-2 mb-4">Select Team members <i class="fa-solid fa-caret-right pt-1"></i></h4>
-    <div class="select mt-5 mb-5">
-      <h5 class="mt-1 mx-2">Number of members <i class="fa-solid fa-caret-right pt-1" required></i></h5>
-      <select class="select-items" id="memberCount" name="member_count">
-        <option value="*" disabled selected>Please select...</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-  
-      </select>
-  
-    </div>
-    <table id="myTable" class="display p-1 rounded border">
+
+    <table id="myTable" class="display p-3 rounded border">
       <thead>
         <tr>
-          <th>Member Name</th>
-          <th>Add to Team</th>
+          <th> Username </th>
+          <th> First Name </th>
+          <th> Add to Team </th>
+
         </tr>
       </thead>
       <tbody>
         {% for user in users %}
         <tr>
           <td>{{ user.username }}</td>
+          <td>{{ user.first_name }}</td>
           <td><input type="checkbox" name="select_members" class="team-member-checkbox"></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+
   </div>
 
-  <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
-    <form method="post">
-      {% csrf_token %}
-      <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
-      <div class="form-group  mt-3">
-        
 
-<div class="select mt-5 mb-5">
-  <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
-  <select class="select-items">
-    <option value="*" disabled selected>Please select...</option>
-    {% for user in users %}
+
+  <div class="select mt-5 mb-5">
+    <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+    <select class="select-items">
+      <option value="*" disabled selected>Please select...</option>
+      {% for user in users %}
       <option value="{{ user.id }}">{{ user.username }}</option>
-    {% endfor %}
+      {% endfor %}
 
     </select>
   </div>
@@ -126,43 +129,88 @@
 
   <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
     <form method="post">
+      {% csrf_token %}
       <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
       <div class="form-group  mt-3">
-        <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
-            class="fa-solid fa-bookmark"></i></label>
-        <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2"
-          placeholder="Title" name="proj_name">
+        
 
-      </div>
-      <div class="form-group mt-2">
-        <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i
-            class="fa-solid fa-clipboard"></i></label>
-        <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
-          placeholder="Description" name="proj_desc"></textarea>
-      </div>
+        <div class="select mt-5 mb-5">
+          <h5 class="mt-1 mx-2">Assign Team Lead <i class="fa-solid fa-caret-right pt-1"></i></h5>
+          <select class="select-items">
+            <option value="*" disabled selected>Please select...</option>
+            {% for user in users %}
+            {% with user_profile=user.userprofile %}
+            {% if user_profile.role == "member" or user_profile.role == "team-lead" %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endif %}
+            {% endwith %}
+            {% endfor %}
 
-      <div class="row mb-3">
-        <div class="col-md-6 form-group mt-2">
-          <label for="exampleFormControlDate1" class="mb-1 fw-bold">Start Date <i
-              class="fa-regular fa-calendar-days"></i></label>
-          <input type="date" class="form-control border border-secondary" placeholder="Start date"
-            id="examleFormControlDate1" name="proj_start">
+          </select>
         </div>
-        <div class="col-md-6 form-group mt-2">
-          <label for="exampleFormControlDate2" class="mb-1 fw-bold">End Date <i
-              class="fa-regular fa-calendar-days"></i></label>
-          <input type="date" class="form-control border border-secondary" placeholder="Start date"
-            id="exampleFormControlDate2" name="proj_end">
+
+
+
+        <div class="container-project rounded shadow-sm p-3 mb-4 border border-black">
+          <form method="post">
+            <h4 class="mt-2">Project Details <i class="fa-solid fa-caret-right pt-1"></i></h4>
+            <div class="form-group  mt-3">
+              <label for="exampleFormControlInput2" class="mb-1 fw-bold">Project Title <i
+                  class="fa-solid fa-bookmark"></i></label>
+              <input type="text" class="form-control border  border-secondary" id="exampleFormControlInput2"
+                placeholder="Title" name="proj_name">
+
+            </div>
+            <div class="form-group mt-2">
+              <label for="exampleFormControlTextarea1" class="mb-1 fw-bold">Project Description <i
+                  class="fa-solid fa-clipboard"></i></label>
+              <textarea class="form-control mb-1 border border-secondary" id="exampleFormControlTextarea1" rows="5"
+                placeholder="Description" name="proj_desc"></textarea>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6 form-group mt-2">
+                <label for="exampleFormControlDate1" class="mb-1 fw-bold">Start Date <i
+                    class="fa-regular fa-calendar-days"></i></label>
+                <input type="date" class="form-control border border-secondary" placeholder="Start date"
+                  id="examleFormControlDate1" name="proj_start">
+              </div>
+              <div class="col-md-6 form-group mt-2">
+                <label for="exampleFormControlDate2" class="mb-1 fw-bold">End Date <i
+                    class="fa-regular fa-calendar-days"></i></label>
+                <input type="date" class="form-control border border-secondary" placeholder="Start date"
+                  id="exampleFormControlDate2" name="proj_end">
+              </div>
+            </div>
+
+
+
+
         </div>
-      </div>
+
+        <style>
+          #myTable {
+            border-collapse: collapse;
+            width: 100%;
+          }
+
+          #myTable th,
+          #myTable td {
+            border: 1px solid #ddd;
+            /* Add gridlines */
+            padding: 8px;
+            /* Adjust padding for spacing */
+            text-align: left;
+          }
+
+          #myTable th {
+            background-color: #f2f2f2;
+            /* Add a background color to header cells if needed */
+          }
+        </style>
 
 
-
-  
-</div>
-
-
-<!-- Script for Checkbox based on Number of Members: 
+        <!-- Script for Checkbox based on Number of Members: 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script>
   $(document).ready(function () {
@@ -193,4 +241,4 @@
   });
 </script> -->
 
-{% endblock content %}
+        {% endblock content %}

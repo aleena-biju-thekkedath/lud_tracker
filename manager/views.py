@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import make_password
 from lud_tracker import settings
-from .models import UserProfile
+from .models import UserProfile, Project
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 # from django.urls import reverse_lazy
@@ -27,6 +27,7 @@ def modal(request):
     return render(request, 'manager/project_modal.html')
 
 # ========For Manager Register Page =======================================================================================
+# Status : Completed 
 
 def process_uploaded_csv(request):
     if request.POST:
@@ -48,17 +49,15 @@ def process_uploaded_csv(request):
             # print(fields[0])
 
             if fields[3].strip().lower() == "manager":
-                user = User(username=fields[0], email=fields[1],
-                        password=make_password(fields[2]),first_name = fields[3], is_superuser =True)
+                user = User(username=fields[1], email=fields[2],
+                        password=make_password(fields[3]),first_name = fields[4], is_superuser =True)
                 user.save()
-            
             else:
-                user = User(username=fields[0], email=fields[1],
-                        password=make_password(fields[2]), first_name = fields[3])
+                user = User(username=fields[1], email=fields[2],
+                        password=make_password(fields[3]), first_name = fields[4])
                 user.save()
             
-            
-            userObj= UserProfile.objects.create(user=user,role=fields[4])
+            userObj= UserProfile.objects.create(user=user,role=fields[5])
             userObj.save()
 
         return redirect('manager-home')
@@ -105,40 +104,60 @@ def register_single(request):
 # ==================================================================================================================
 
 
+# # ===================================== Project Details for The Manager ===========================================
+# Status: 
 
 def team_project_details(request):
     users = User.objects.all()
-    print(users)
+
     if request.method == 'POST':
+        # Assuming you want to get the logged-in user
         user = request.user
+
         proj_name = request.POST.get('proj_name')
         proj_desc = request.POST.get('proj_desc')
         proj_start = request.POST.get('proj_start')
-        proj_end= request.POST.get('proj_end') 
-        proj_lead_id = request.post.get()
+        proj_end = request.POST.get('proj_end')
+
+        # Fix the typo: should be request.POST.get, not request.post.get
         lead_name = request.POST.get('team-lead-username')
-        user = User.objects.get(username = lead_name)
-        
+
+        # Ensure that a user with the given username exists
+        try:
+            user = User.objects.get(username=lead_name)
+        except User.DoesNotExist:
+            messages.error(request, "User with the provided username does not exist.")
+            return redirect("manager-create")
+
         proj_lead_id = user.id
+        manager_id = request.POST.get('manager-id')
         project_client = "CHRIST University"
-        # Retrieve the user based on the selected username
-        project_details = Project.objects.create(proj_name =proj_name,
-                                                 proj_desc = proj_desc,
-                                                proj_client = project_client,
-                                                proj_manager_id = manager_id,
-                                                proj_status = "Active", 
-                                                proj_startdate = proj_start,
-                                                proj_enddate = proj_end,
-                                                proj_lead_id = proj_lead_id) 
-        
+
+        # Create the project object
+        project_details = Project.objects.create(
+            proj_name=proj_name,
+            proj_desc=proj_desc,
+            proj_client=project_client,
+            proj_manager_id=manager_id,
+            proj_status="Active",  # Assuming you want to set the status to "Active"
+            proj_startdate=proj_start,
+            proj_enddate=proj_end,
+            proj_lead_id=proj_lead_id
+        )
+
+        # Save the project
         project_details.save()
+
         messages.success(request, "Task Assigned Successfully..")
         return redirect("manager-create")
-    
+
     else:
-        return render(request,"manager/create_team.html")
-# ,{'users': users}
+        return render(request, "manager/create_team.html", {"users": users})
+
+
     
+# ==================================================================================================================
+
 
 # def update_project_dates(request): 
 #         project_name = request.POST.get('project_name')
