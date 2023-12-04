@@ -8,7 +8,7 @@ urlpatterns = [
     path("comments/",comments,name='comments'),
     path("logout/",LogoutView.as_view(),name='logout'),
     # path("get_task_details/", task_details, name = "task-details")
-    path('mark/as/complete/<int:pk>/',markTaskAsDone,name="markTaskAsDone"),
+    path('mark/as/done/<int:pk>/',markTaskAsDone,name="markTaskAsDone"),
     
 
 ]

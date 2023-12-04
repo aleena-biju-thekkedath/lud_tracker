@@ -56,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "lud_tracker.urls"
+LOGIN_REDIRECT_URL = 'login-page'
+LOGOUT_REDIRECT_URL = 'login-page'
 
 TEMPLATES = [
     {

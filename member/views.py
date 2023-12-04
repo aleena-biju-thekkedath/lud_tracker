@@ -17,7 +17,7 @@ def home_member(request):
         # print("Member Id: ", member)
         project = Member_Project_Status.objects.get(emp_id=member)
 
-        task = Tasks.objects.filter(emp_id_assigned_to_id=project)
+        task_list = Tasks.objects.filter(emp_id_assigned_to_id=project)
         # print(task)
 
         # task_title = task.title
@@ -37,7 +37,7 @@ def home_member(request):
         task_start_date = None
         task_end_date = None
 
-    return render(request, "member/member.html", {"task": task})
+    return render(request, "member/member.html", {"task_list": task_list})
 
 
 

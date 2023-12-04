@@ -19,8 +19,11 @@ def is_admin(user):
 # ------------------------------------------ Manager Home Page View  ---------------------------------------------
 # Ensure the user is logged in
 def home_manager(request):
+    current_user = request.user
+    project_Obj=Project.objects.filter(proj_mgr_id=current_user)
+    print(project_Obj)
     # user = User.objects.create()
-    return render(request, "manager/manager.html")
+    return render(request, "manager/manager.html",{"project_details": project_Obj,})
 
 
 def modal(request):
@@ -141,6 +144,9 @@ def team_project_details(request):
 
      # Assuming you want to get the logged-in user
     current_user = request.user
+    project_Obj=Project.objects.filter(proj_mgr_id=current_user)
+    print(project_Obj)
+
     # all_Assigned_members = Member_Project_Status.objects.all()
     # all_Assigned_members.save()
     if request.method == "POST":
@@ -194,7 +200,7 @@ def team_project_details(request):
         return render(
             request,
             "manager/create_team.html",
-            {"users": users, "user_profile": user_profile,"manager": current_user.username},
+            {"users": users, "project_details": project_Obj,"manager": current_user.username},
         )
 
 

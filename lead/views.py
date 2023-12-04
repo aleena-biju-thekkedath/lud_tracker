@@ -15,7 +15,9 @@ def home_lead(request):
     lead=request.user
     projectObj=Project.objects.get(proj_lead_id=lead)
     members_list=Member_Project_Status.objects.filter(project_id=projectObj)
-    return render(request,'lead/lead1.html',{"members_list": members_list})
+    task_list=Tasks.objects.filter(emp_id_assigned_to__project_id=projectObj)
+    # print(task_list)
+    return render(request,'lead/lead1.html',{"members_list": members_list,'task_list':task_list})
 
 # @login_required 
 # @user_passes_test(is_staff)
@@ -111,7 +113,13 @@ def try_lead(request):
 # @login_required 
 # @user_passes_test(is_staff)
 
-    
+
+
+def markTaskAsComplete(request,pk):
+    TaskObj=Tasks.objects.get(id=pk)
+    TaskObj.task_status=2
+    TaskObj.save()
+    return redirect('lead-home')
 
 
                   
