@@ -42,3 +42,36 @@ def login_page(request):
             messages.error(request, 'Invalid username or password. Please try again.')
 
     return render(request, 'member/login.html')
+
+from django.shortcuts import render
+from manager.models import User, Project , Tasks, Member_Project_Status
+
+def task_details(request):
+    # Retrieve the project description based on the project_id
+    try:
+        member = request.user.id
+        print("Member Id: ", member)
+        project = Member_Project_Status.objects.get(emp_id = member)
+        project_id = project.id
+        print("Project Id: ", project_id)
+        task = Tasks.objects.get(emp_id_assigned_to_id = project_id)
+
+        task_title = task.title
+        print(task_title)
+        task_description = task.description
+        print(task_description)
+        task_start_date = task.date_created
+        print(task_start_date)
+        task_end_date = task.date_ended
+        print(task_end_date)
+
+    except Tasks.DoesNotExist:
+        # Handle the case where the project does not exist
+        task_title = None
+        task_description = None
+        task_start_date = None
+        task_end_date  = None
+
+        
+    return render(request, 'member/member.html', 
+     {'task_title': task_title},{'task_description': task_description},{'task_start_date': task_start_date},{'task_end_date': task_end_date})
